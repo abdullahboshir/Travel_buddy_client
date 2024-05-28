@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Input from '../FormHandler/Input';
 import InputMultiSelection from '../FormHandler/InputMultiSelection';
 
-const PostTrip = ({session}) => {
+const PostTrip = ({session}: any) => {
     const [values, setValues] = useState([]) as any;
 
     console.log('sessionnnnnnnnnnnn', session.user)
