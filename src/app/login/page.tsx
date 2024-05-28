@@ -4,9 +4,16 @@ import icon from '../../assets/icons/313418393_513873044086941_91555468399209745
 import Image from 'next/image';
 import SocialLogin from './SocialLogin';
 import Input from '@/components/FormHandler/Input';
-import { FormEventHandler } from 'react';
+import { loginUser } from '@/utils/actions/loginUser';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const Login = () => {
+    const [isLogin, setIsLogin] = useState(true);
+    const [haveAccount, sethaveAccount] = useState(false);
+
+    const router = useRouter();
 
 const handleOnSubmit = async (e: any) => {
   try {
@@ -20,18 +27,13 @@ const handleOnSubmit = async (e: any) => {
    }
     };
 
-    const res = await fetch('http://localhost:5000/api/v1/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    });
+const user = await loginUser(formData);
+if(user.data.token){
+    localStorage.setItem('accessToken', user?.data?.token);
+};
 
-    const tours = await res.json();
-
-    
-    console.log('valueeeeeeeeeeeeee', tours)
+router.push('/')
+  
   } catch (error: any) {
     throw new Error(error.message)
   }
@@ -41,34 +43,41 @@ const handleOnSubmit = async (e: any) => {
     return (
         <div>
             <div className="hero min-h-screen bg-base-200 flex items-center justify-center shadow-2xl">
-                <div className="relative flex items-center justify-center lg:flex-row-reverse w-[950px] max-w-6xl h-auto rounded-2xl">
+                <div className="relative flex items-center justify-center lg:flex-row-reverse w-[950px] max-w-6xl h-auto rounded-2xl mt-16">
 
                   
-                    <div className="absolute right-0 z-10 rounded-2xl w-full lg:w-[480px] h-96 shadow-2xl bg-base-100 p-10">
+                    <div className="absolute right-0 z-10 rounded-2xl w-full lg:w-[480px] shadow-2xl bg-base-100 p-8 ">
                         <form onSubmit={handleOnSubmit} className="h-full flex flex-col justify-center">
 
+                            {
+                                !isLogin && <Input name='username' type='text' label='Username'/> 
+                            }
                             <Input name='email' type='email' label='Email'/>
                             <Input name='password' type='password' label='Password'/>
-                            {/* <div className="form-control mb-4">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input type="email" placeholder="email" className="input input-bordered" required />
-                            </div> */}
 
-                            {/* <div className="form-control mb-4">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required />
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
-                            </div> */}
+                        <div className='text-black hover:underline'>
+                        { isLogin ?
+                         <Link href='/' >Forgot Password?</Link>
+                         :
+                        <div>
+                            <input type='checkbox' />
+                             <button className='hover:underline ml-2'>Accept term and condition</button>
+                        </div>
+                         }
+                         </div>
+                         
                             <div className="form-control mt-6">
-                                <button type='submit' className="btn bg-[#02bb96]">Login</button>
+                                <button type='submit' className="btn bg-[#00D7C0] text-white font-bold text-lg hover:bg-black">{isLogin? 'Login' : 'Sign Up'}</button>
                             </div>
                         </form>
+                        <div className='text-black mt-1'>
+                                {
+                                    
+                                    isLogin?  <button onClick={() => setIsLogin(false)} className='hover:underline'>Create a new account</button> 
+                                    :
+                                    <button onClick={() => setIsLogin(true)} className='hover:underline'>Already have an account?</button>
+                                }
+                            </div>
                     </div>
 
                   

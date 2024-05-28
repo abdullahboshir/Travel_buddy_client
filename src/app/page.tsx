@@ -1,10 +1,13 @@
 import Navbar from "@/components/Header/Navbar";
 import Silder from "@/components/Hero/Silder";
 import HomePage from "./home/page";
-import Service from "@/components/Sections/Service";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/authOptions";
 
 
-export default function Home() {
+const Home = async () => {
+
+
   return (
     
    <main>
@@ -19,3 +22,6 @@ export default function Home() {
   
   );
 }
+
+
+export default Home;

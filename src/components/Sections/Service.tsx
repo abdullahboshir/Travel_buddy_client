@@ -2,10 +2,7 @@ import React from 'react';
 import Card from '../Cards/Card';
 import bgImg from '../../assets/pexels-pixabay-207896.jpg'; 
 import Image from 'next/image';
-import TourCard from '../Cards/TourCard';
-import TourOffer from './TourOffer';
-import ViewTours from './ViewTours';
-import Footer from '../Footer';
+
 
 
 const Service = () => {

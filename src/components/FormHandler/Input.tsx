@@ -13,7 +13,7 @@ const Input = ({name, type, label }: TInputProps) => {
                      <label className='label'>
                      <span className="label-text">{label}</span>
                      </label>
-                     <input name={name} type={type} placeholder={label} className="input input-bordered" required />
+                     <input name={name} type={type} placeholder={label} className="input input-bordered " required />
              </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import viewImg from '../../assets/gettyimages-1039937216-2048x2048.jpg';
 import Image from 'next/image';
-import Footer from '../Footer';
+
 
 const ViewTours = () => {
     return (
