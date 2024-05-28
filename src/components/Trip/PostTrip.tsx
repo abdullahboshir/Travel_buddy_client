@@ -26,7 +26,7 @@ const PostTrip = ({session}) => {
              method: 'POST',
              headers: {
                  'Content-Type': 'application/json',
-                 'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDE5NjRhLTY2MDYtNDA5Ny04OGI2LTdiNzE2YmFlNzFlNCIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTY5MTYwNTUsImV4cCI6MTcxOTUwODA1NX0.5ER8bYVaPRZYVla4Ye8Ta3hN1yDJKNtJ8mPcK1N8Oig`
+                //  'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDE5NjRhLTY2MDYtNDA5Ny04OGI2LTdiNzE2YmFlNzFlNCIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTY5MTYwNTUsImV4cCI6MTcxOTUwODA1NX0.5ER8bYVaPRZYVla4Ye8Ta3hN1yDJKNtJ8mPcK1N8Oig`
                 },
                 body: JSON.stringify(formData),
                 cache: 'no-store'
