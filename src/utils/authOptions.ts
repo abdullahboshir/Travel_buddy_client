@@ -1,3 +1,4 @@
+import { config } from "@/config";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -5,13 +6,13 @@ import GoogleProvider from "next-auth/providers/google";
 export const authOptions: NextAuthOptions = {
     providers: [
 GoogleProvider({
-clientId: process.env.GOOGLE_ID as string,
-clientSecret: process.env.GOOGLE_SECRET as string
+clientId: config.env.auth.google_id as string,
+clientSecret: config.env.auth.google_secret as string
 })
     ],
     pages: {
         signIn: '/login',
         error: '/auth/error'
     },
-    secret: process.env.NEXTAUTH_SECRET
+    secret: config.env.next_auth_secret
 }
