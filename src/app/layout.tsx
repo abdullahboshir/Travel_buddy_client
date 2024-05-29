@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Header/Navbar";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/authOptions";
 import Footer from "@/components/Footer";
+import SessionWrapper from "@/components/SessionWrapper";
+import { useSession } from "next-auth/react";
+
+
 
 const raleway = Raleway({ subsets: ["latin"] });
 
@@ -19,14 +21,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const session = await getServerSession(authOptions) as any;
+
+  
   return (
+    <SessionWrapper>
     <html lang="en"  data-theme="light">
       <body className={raleway.className}>
       <div className="relative ">
 
       <div className='absolute left-0 top-0 w-full z-20'>
-          <Navbar session={session}/>
+          <Navbar/>
           </div>
 
         <div>
@@ -40,5 +44,6 @@ export default async function RootLayout({
       </div>
       </body>
     </html>
+    </SessionWrapper>
   );
 }

@@ -5,11 +5,10 @@ import Silder from '@/components/Hero/Silder';
 import Service from '@/components/Sections/Service';
 import TourOffer from '@/components/Sections/TourOffer';
 import ViewTours from '@/components/Sections/ViewTours';
-import { authOptions } from '@/utils/authOptions';
-import { getServerSession } from 'next-auth';
 import React from 'react';
 
 const HomePage = async () => {
+    
 
 const res = await fetch('http://localhost:5000/api/v1/trips',
     {

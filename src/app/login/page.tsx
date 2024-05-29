@@ -4,41 +4,51 @@ import icon from '../../assets/icons/313418393_513873044086941_91555468399209745
 import Image from 'next/image';
 import SocialLogin from './SocialLogin';
 import Input from '@/components/FormHandler/Input';
-import { loginUser } from '@/utils/actions/loginUser';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
-    const [haveAccount, sethaveAccount] = useState(false);
+    const router = useRouter()
+    const params = useSearchParams();
+    const callBackUrl = params.get('callbackUrl') as string;
+    const {data: session, status} = useSession();
 
-    const router = useRouter();
-
+      
 const handleOnSubmit = async (e: any) => {
-  try {
-    e.preventDefault();
-    const formData: any ={};
-   const formElements = e.target.elements;
+    try {
+        e.preventDefault();
+        const formData: any ={};
+        const formElements = e.target.elements;
+        
+        for(const element of formElements){
+            if(element.name){
+                formData[element.name] = element.value
+            }
+        };
+        
+        // const user = await loginUser(formData);
+        const result = await signIn('credentials', {...formData, callbackUrl: callBackUrl});
+        
 
-   for(const element of formElements){
-   if(element.name){
-    formData[element.name] = element.value
-   }
-    };
 
-const user = await loginUser(formData);
-if(user.data.token){
-    localStorage.setItem('accessToken', user?.data?.token);
-};
+if (result?.ok === true && result?.status === 200) {
+    router.push(callBackUrl);
+  } else {
+    console.error(result?.error);
+  }
 
-router.push('/')
-  
   } catch (error: any) {
     throw new Error(error.message)
   }
-
 };
+
+if (status === "loading") {
+    return <div className='h-screen w-full'>Loading...</div>;
+  }
+
 
     return (
         <div>
@@ -96,7 +106,7 @@ router.push('/')
                                 <h2 className="text-4xl font-bold">Travel Buddy</h2>
                                 <p className="font-semibold text-center w-[200px]">Plan your perfect trip with us. and Enjoy your life.</p>
                                 
-                                {/* <h2 className="text-4xl font-bold">Login</h2> */}
+                             
                             </div>
 
                             <div className='absolute bottom-0 left-36'>

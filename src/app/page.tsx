@@ -1,8 +1,6 @@
-import Navbar from "@/components/Header/Navbar";
-import Silder from "@/components/Hero/Silder";
+import { SessionProvider, useSession } from "next-auth/react";
 import HomePage from "./home/page";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/authOptions";
+
 
 
 const Home = async () => {
@@ -12,13 +10,12 @@ const Home = async () => {
     
    <main>
   <div>
-
-  <div>
-      <HomePage/>  
-  </div>
-
+ 
+    <HomePage/>  
+ 
   </div>
    </main>
+
   
   );
 }

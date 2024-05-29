@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import image1 from '../../assets/carousel_img/slider-img1.jpg';
 import image2 from '../../assets/carousel_img/slider-img2.jpg';
 import image3 from '../../assets/carousel_img/slider-img3.jpg';
+import Link from 'next/link';
 
 const Silder = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -59,7 +60,7 @@ const Silder = () => {
                                 <div className='bg-[#d419707b] w-[420px] h-[230px] flex flex-col justify-center items-center py-3 left-5 top-5 absolute bg-opacity-80'>
                                     <h2 className='text-4xl text-center mb-2'>{slide.title}</h2>
                                     <p className='w-[75%] text-center mb-5'>{slide.description}</p>
-                                    <button className='btn btn-sm hover:bg-black hover:text-white hover:border-0'>VIEW MORE</button>
+                                    <Link href='trip/create-trip' className='btn btn-sm hover:bg-[#1de2a3] hover:text-white hover:border-0 hover:text-[15px] hover:font-bold ease-in duration-100'>Share Your Trip</Link>
                                 </div>
                             </div>
 

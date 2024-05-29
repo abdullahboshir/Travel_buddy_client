@@ -3,29 +3,29 @@ import React, { useEffect, useState } from 'react';
 import icon from '../../assets/icons/313418393_513873044086941_9155546839920974588_n1.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import { signOut } from 'next-auth/react';
+import {signOut, useSession } from 'next-auth/react';
 
-type TUser = {
-  name: string;
-};
+const Navbar = () => {
 
-const Navbar = ({session}: {session: {user: TUser}}) => {
-  const [isLogin, setIsLogin] = useState(false);
+  const { data: session, status } = useSession();
+
+
+  console.log('ddddddddddddddd', session, status)
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken');
-    setIsLogin(!!token);
-  }, []);
+    if (status === "unauthenticated") {
+      <Link href='/login' />
+    }
+  }, [status]);
 
-  const handleSignOut = () => {
-    localStorage.removeItem('accessToken');
-    signOut();
-    setIsLogin(false);
-  };
+  // if (status === "loading") {
+  //   return <div>Loading...</div>;
+  // }
+
 
     return (
-        <div>
-            <div className="navbar">
+<div>
+  <div className="navbar">
 
   <div className="navbar-start">
    <div className='bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full flex justify-center items-center p-2 ml-5 ease-in duration-200'>
@@ -35,7 +35,7 @@ const Navbar = ({session}: {session: {user: TUser}}) => {
 
   <div className="navbar-center hidden lg:flex bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full py-1 px-5">
     <ul className="menu menu-horizontal px-1 gap-7 font-bold">
-   <Link href='/home'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Home</span></Link>
+      <Link href='/home'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Home</span></Link>
       <Link href='/profile'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>My Profile</span></Link>
       <Link href='/about'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>About Us</span></Link>
       <Link href='login'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Login</span> </Link>
@@ -46,7 +46,7 @@ const Navbar = ({session}: {session: {user: TUser}}) => {
   <div className="navbar-end mr-5">
       <div className=' bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full py-2 px-5'>
     {
-      isLogin? <button onClick={handleSignOut}><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Login</span></button> : <Link href='/login'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[17px] ease-in duration-200 font-bold'>Login</span></Link>
+      session? <button onClick={() =>  signOut()}><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Logout</span></button> : <Link href='/login'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[17px] ease-in duration-200 font-bold'>Login</span></Link>
     }
     </div>
   </div>

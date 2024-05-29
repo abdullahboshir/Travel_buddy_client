@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Input from '../FormHandler/Input';
 import InputMultiSelection from '../FormHandler/InputMultiSelection';
+import Swal from 'sweetalert2';
 
 const PostTrip = ({session}: any) => {
     const [values, setValues] = useState([]) as any;
@@ -33,6 +34,19 @@ const PostTrip = ({session}: any) => {
             });
             
             const userInfo = await res.json();
+
+            if(userInfo && userInfo.success === true){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            };
+
+            e.target.reset();
+            setValues([])
             console.log('got dataaaaaaaaaaaa', userInfo)
         
         } catch (error: any) {
