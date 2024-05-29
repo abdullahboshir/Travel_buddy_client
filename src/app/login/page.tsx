@@ -6,14 +6,14 @@ import SocialLogin from './SocialLogin';
 import Input from '@/components/FormHandler/Input';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
     const router = useRouter()
     const params = useSearchParams();
-    const callBackUrl = params.get('callbackUrl') as string;
+    const callbackUrl = params.get('callbackUrl') as string;
     const {data: session, status} = useSession();
 
       
@@ -30,12 +30,12 @@ const handleOnSubmit = async (e: any) => {
         };
         
         // const user = await loginUser(formData);
-        const result = await signIn('credentials', {...formData, callbackUrl: callBackUrl});
+        const result = await signIn('credentials', {...formData, callbackUrl});
         
 
 
 if (result?.ok === true && result?.status === 200) {
-    router.push(callBackUrl);
+    router.push(callbackUrl);
   } else {
     console.error(result?.error);
   }
