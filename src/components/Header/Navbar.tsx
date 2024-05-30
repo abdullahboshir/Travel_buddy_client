@@ -5,16 +5,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {signOut, useSession } from 'next-auth/react';
 
+
 const Navbar = () => {
 
   const { data: session, status } = useSession();
 
 
-  console.log('ddddddddddddddd', session, status)
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      <Link href='/login' />
+      <Link href='/auth/login' />
     }
   }, [status]);
 
@@ -38,7 +38,6 @@ const Navbar = () => {
       <Link href='/home'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Home</span></Link>
       <Link href='/profile'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>My Profile</span></Link>
       <Link href='/about'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>About Us</span></Link>
-      <Link href='login'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Login</span> </Link>
       <Link href="/dashboard"><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Dashboard</span> </Link>
     </ul>
   </div>
@@ -46,7 +45,7 @@ const Navbar = () => {
   <div className="navbar-end mr-5">
       <div className=' bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full py-2 px-5'>
     {
-      session? <button onClick={() =>  signOut()}><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Logout</span></button> : <Link href='/login'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[17px] ease-in duration-200 font-bold'>Login</span></Link>
+      session? <button onClick={() =>  signOut()}><span className='hover:text-white hover:text-[#1de2a3] hover:text-[15px] ease-in duration-200'>Logout</span></button> : <Link href='/auth/login'><span className='hover:text-white hover:text-[#1de2a3] hover:text-[17px] ease-in duration-200 font-bold'>Login</span></Link>
     }
     </div>
   </div>

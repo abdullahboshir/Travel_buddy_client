@@ -16,7 +16,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+      router.push(`/auth/login?callbackUrl=${encodeURIComponent(pathname)}`);
     }
   }, [status, router, pathname]);
 

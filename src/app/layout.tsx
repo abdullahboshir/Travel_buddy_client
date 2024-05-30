@@ -22,7 +22,6 @@ export default async function RootLayout({
 }>) {
 
 
-  
   return (
     <SessionWrapper>
     <html lang="en"  data-theme="light">

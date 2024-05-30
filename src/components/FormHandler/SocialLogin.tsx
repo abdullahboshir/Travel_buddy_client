@@ -1,8 +1,10 @@
 import { signIn } from 'next-auth/react';
+
 import { AiOutlineGoogle, AiFillGithub, AiFillFacebook, AiFillInstagram } from 'react-icons/ai';
-// import { signInWithGoogle, signInWithGithub } from './auth'; // Adjust the import paths as necessary
 
 const SocialLogin = () => {
+
+
     return (
         <div className="text-center h-24 flex items-center justify-center gap-5">
           <div>

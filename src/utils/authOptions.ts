@@ -17,6 +17,7 @@ CredentialsProvider({
         password: {  label: "Password", type: "password" }
     },
     async authorize(credentials, req) {
+    
         const res = await fetch(`${config.env.backend_url}/auth/login`, {
           method: "POST",
           body: JSON.stringify(credentials),
@@ -34,8 +35,8 @@ CredentialsProvider({
 ],
 
     pages: {
-        signIn: '/login',
-        error: '/auth/error'
+        signIn: '/auth/login',
+        error: '/auth/error',
     },
     secret: config.env.next_auth_secret,
     callbacks: {
@@ -52,5 +53,6 @@ CredentialsProvider({
             return session;
           }
           
-    }
+    },
+    debug: true
 }

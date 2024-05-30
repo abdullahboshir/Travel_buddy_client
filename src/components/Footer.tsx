@@ -34,7 +34,7 @@ const Footer = () => {
           <Link href="/about" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">
           About
           </Link>
-          <Link href="/login" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">
+          <Link href="/auth/login" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">
           Login
           </Link>
         </div>

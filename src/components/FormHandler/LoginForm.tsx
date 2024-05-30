@@ -9,30 +9,34 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 
-const Login = () => {
+const LoginForm = () => {
     const [isLogin, setIsLogin] = useState(true);
     const router = useRouter()
     const params = useSearchParams();
-    const callbackUrl = params.get('callbackUrl') as string;
-    const {data: session, status} = useSession();
+    const callbackUrl = params.get('callbackUrl') || '/' as string;
+    const { data: session, status } = useSession();
 
-      
-const handleOnSubmit = async (e: any) => {
+
+    console.log('000000000000000000', session)
+  
+const handleLoginOnSubmit = async (e: any) => {
     try {
         e.preventDefault();
         const formData: any ={};
         const formElements = e.target.elements;
         
-        for(const element of formElements){
-            if(element.name){
-                formData[element.name] = element.value
-            }
+        if(formElements){
+            for(const element of formElements){
+                if(element.name){
+                    formData[element.name] = element.value
+                }
+            };
         };
-        
+
+
         // const user = await loginUser(formData);
         const result = await signIn('credentials', {...formData, callbackUrl});
-        
-
+        console.log('rsultttttttttttttt', result)
 
 if (result?.ok === true && result?.status === 200) {
     router.push(callbackUrl);
@@ -41,9 +45,44 @@ if (result?.ok === true && result?.status === 200) {
   }
 
   } catch (error: any) {
+    throw new Error(error?.message)
+  }
+};
+
+
+
+
+const handleSignupOnSubmit = async (e: any) => {
+    try {
+        e.preventDefault();
+        const formData: any ={};
+
+        const formElements = e.target.elements;
+        
+        if(formElements){
+            for(const element of formElements){
+                if(element.name){
+                    formData[element.name] = element.value
+                }
+            };
+        };
+
+        
+console.log('ddsfsdg555555555555555555555', formData)
+
+// if (result?.ok === true && result?.status === 200) {
+//     router.push(callbackUrl);
+//   } else {
+//     console.error(result?.error);
+//   }
+
+  } catch (error: any) {
     throw new Error(error.message)
   }
 };
+
+
+
 
 if (status === "loading") {
     return <div className='h-screen w-full'>Loading...</div>;
@@ -57,7 +96,7 @@ if (status === "loading") {
 
                   
                     <div className="absolute right-0 z-10 rounded-2xl w-full lg:w-[480px] shadow-2xl bg-base-100 p-8 ">
-                        <form onSubmit={handleOnSubmit} className="h-full flex flex-col justify-center">
+                        <form onSubmit={isLogin? handleLoginOnSubmit: handleSignupOnSubmit} className="h-full flex flex-col justify-center">
 
                             {
                                 !isLogin && <Input name='username' type='text' label='Username'/> 
@@ -122,4 +161,4 @@ if (status === "loading") {
     );
 };
 
-export default Login;
+export default LoginForm;
