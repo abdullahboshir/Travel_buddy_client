@@ -18,10 +18,6 @@ const Navbar = () => {
     }
   }, [status]);
 
-  // if (status === "loading") {
-  //   return <div>Loading...</div>;
-  // }
-
 
     return (
 <div>

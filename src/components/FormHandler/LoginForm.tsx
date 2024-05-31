@@ -85,7 +85,7 @@ console.log('ddsfsdg555555555555555555555', formData)
 
 
 if (status === "loading") {
-    return <div className='h-screen w-full'>Loading...</div>;
+    return <div className='h-screen w-full text-4xl'>Loading...</div>;
   }
 
 

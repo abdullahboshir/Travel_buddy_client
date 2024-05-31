@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Input from "../FormHandler/Input";
 import InputMultiSelection from "../FormHandler/InputMultiSelection";
 import Swal from "sweetalert2";
@@ -8,52 +8,57 @@ import FileUploaderInput from "../FormHandler/FileUploaderInput";
 
 const PostTrip = ({ session }: any) => {
   const [values, setValues] = useState([]);
-  const [imageURL, setImageURL] = useState("");
-  const [file, setFile] = useState(null);
-  const [previewImg, setPreviewImg] = useState("");
-  const imgStorageKey = "bffbc4836fab67f83f2d753b8fee741e";
+  const [imageURL, setImageURL] = useState<string[]>([]);
+  const [files, setFiles] = useState([]);
+  const [previewImgs, setPreviewImgs] = useState([]);
+  const imgStorageKey = "52e2a715dfd6d706e4d4ce8b0cd8526f";
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const inputData: any = {};
       const formElements = e.target.elements;
-
+  
       for (const element of formElements) {
-        if (element.name) {
+        if (element.name && element.type !== 'file') {
           inputData[element.name] = element.value;
         }
       }
-
+  
       inputData.activities = values;
-
-      if (file) {
-        const formData = new FormData();
-        formData.append("image", file);
-
-        const imgRes = await fetch(
-          `https://api.imgbb.com/1/upload?key=${imgStorageKey}`,
-          {
-            method: "POST",
-            body: formData,
+  
+      if (files.length > 0) {
+        const imgURLs: string[] = [];
+        
+        for (const file of files) {
+          const formData = new FormData();
+          formData.append('image', file);
+  
+          const imgRes = await fetch(
+            `https://api.imgbb.com/1/upload?key=${imgStorageKey}`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+          const imgData = await imgRes.json();
+  
+          if (imgData.success) {
+            imgURLs.push(imgData.data.url);
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Image upload failed!",
+            });
+            return;
           }
-        );
-
-        const imgData = await imgRes.json();
-
-        if (imgData.success) {
-          setImageURL(imgData.data.url);
-          inputData.photos = imgData.data.url;
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Image upload failed!",
-          });
-          return;
         }
+  
+        setImageURL(imgURLs);
+        inputData.photos = imgURLs; 
       }
-
+  
       const res = await fetch("http://localhost:5000/api/v1/trips/create", {
         method: "POST",
         headers: {
@@ -62,9 +67,9 @@ const PostTrip = ({ session }: any) => {
         },
         body: JSON.stringify(inputData),
       });
-
+  
       const userInfo = await res.json();
-
+  
       if (userInfo && userInfo.success === true) {
         Swal.fire({
           position: "top-end",
@@ -75,7 +80,7 @@ const PostTrip = ({ session }: any) => {
         });
         e.target.reset();
         setValues([]);
-        setPreviewImg("");
+        setPreviewImgs([]);
       } else {
         Swal.fire({
           icon: "error",
@@ -92,13 +97,15 @@ const PostTrip = ({ session }: any) => {
       });
     }
   };
+  
 
   const handleImageUpload = (e: any) => {
-    const imgData = e.target.files[0];
-    if (imgData) {
-      setFile(imgData);
-      const tempURL = URL.createObjectURL(imgData);
-      setPreviewImg(tempURL);
+    const imgData = e.target.files;
+    if (imgData && imgData.length) {
+      const allFiles = Array.from(e.target.files).slice(0, 8) as any;
+      setFiles(allFiles);
+     const previewFiles = allFiles.map((file: any) =>URL.createObjectURL(file)) as [];
+     setPreviewImgs(previewFiles);
     }
   };
 
@@ -108,7 +115,7 @@ const PostTrip = ({ session }: any) => {
         onSubmit={handleOnSubmit}
         className="h-full flex flex-col justify-center"
       >
-        <div className="right-0 rounded-2xl w-full lg:w-[1000px] lg:h-[500px] shadow-2xl bg-base-100 flex flex-col items-center justify-center text-black overflow-y-scroll mt-12 p-10">
+        <div className={`right-0 rounded-2xl w-full lg:w-[1000px] lg:h-[500px] shadow-2xl bg-base-100 flex flex-col items-center justify-center text-black overflow-y-scroll mt-12 p-10 pt-${previewImgs.length && 52}`}>
           <div className="text-black mb-6">
             <h1 className="text-4xl font-semibold">Create a Trip</h1>
           </div>
@@ -147,17 +154,27 @@ const PostTrip = ({ session }: any) => {
               <FileUploaderInput handleImageUpload={handleImageUpload} />
             </div>
           </div>
-          {previewImg && (
-            <div className="mt-4">
-              <Image
-                src={previewImg}
-                width={200}
-                height={200}
-                alt="Preview Image"
-                className="w-40 h-40 object-cover"
-              />
-            </div>
-          )}
+         
+
+
+          {previewImgs.length > 0 && (
+  <div className="flex w-full justify-center items-center gap-2 mb-3">
+    {previewImgs.map((img, index) => (
+      <div key={index} className="relative w-28 h-28 overflow-hidden rounded-lg">
+        <Image
+          src={img}
+          alt={`Preview Image ${index}`}
+          layout="fill"
+          objectFit="cover"
+          className="w-full h-full"
+        />
+      </div>
+    ))}
+  </div>
+)}
+
+
+
           <div className="my-2">
             <button
               type="submit"

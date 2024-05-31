@@ -21,7 +21,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   }, [status, router, pathname]);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <div className='h-screen w-full text-4xl text-center'>Loading...</div>;
   }
 
   return <>{session ? children : null}</>;
