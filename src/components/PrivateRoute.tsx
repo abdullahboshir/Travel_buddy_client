@@ -2,6 +2,7 @@
 import {useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Spinner from "./Spinner";
 
 interface PrivateRouteProps {
   children: React.ReactNode;
@@ -21,7 +22,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   }, [status, router, pathname]);
 
   if (status === "loading") {
-    return <div className='h-screen w-full text-4xl text-center'>Loading...</div>;
+    return <Spinner/>;
   }
 
   return <>{session ? children : null}</>;

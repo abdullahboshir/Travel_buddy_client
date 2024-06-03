@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
+import Spinner from '../Spinner';
 
 const LoginForm = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -17,7 +18,7 @@ const LoginForm = () => {
     const { data: session, status } = useSession();
 
 
-    console.log('000000000000000000', session)
+   
   
 const handleLoginOnSubmit = async (e: any) => {
     try {
@@ -34,9 +35,8 @@ const handleLoginOnSubmit = async (e: any) => {
         };
 
 
-        // const user = await loginUser(formData);
+   
         const result = await signIn('credentials', {...formData, callbackUrl});
-        console.log('rsultttttttttttttt', result)
 
 if (result?.ok === true && result?.status === 200) {
     router.push(callbackUrl);
@@ -67,8 +67,6 @@ const handleSignupOnSubmit = async (e: any) => {
             };
         };
 
-        
-console.log('ddsfsdg555555555555555555555', formData)
 
 // if (result?.ok === true && result?.status === 200) {
 //     router.push(callbackUrl);
@@ -85,7 +83,7 @@ console.log('ddsfsdg555555555555555555555', formData)
 
 
 if (status === "loading") {
-    return <div className='h-screen w-full text-4xl'>Loading...</div>;
+    return <Spinner/>;
   }
 
 
@@ -99,10 +97,10 @@ if (status === "loading") {
                         <form onSubmit={isLogin? handleLoginOnSubmit: handleSignupOnSubmit} className="h-full flex flex-col justify-center">
 
                             {
-                                !isLogin && <Input name='username' type='text' label='Username'/> 
+                                !isLogin && <Input name='username' type='text' label='Username' width='md'/> 
                             }
-                            <Input name='email' type='email' label='Email'/>
-                            <Input name='password' type='password' label='Password'/>
+                            <Input name='email' type='email' label='Email' width='md'/>
+                            <Input name='password' type='password' label='Password' width='md'/>
 
                         <div className='text-black hover:underline'>
                         { isLogin ?

@@ -121,25 +121,25 @@ const PostTrip = ({ session }: any) => {
           </div>
           <div className="grid grid-cols-3 grid-flow-row gap-2 w-[100%] flex items-center justify-center">
             <div className="w-full lg:w-[100%]">
-              <Input name="destination" type="text" label="Destination" />
+              <Input name="destination" type="text" label="Destination"  width='md'/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="type" type="text" label="Type" />
+              <Input name="type" type="text" label="Type"  width='md'/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="location" type="text" label="Location" />
+              <Input name="location" type="text" label="Location"  width='md'/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="itinerary" type="text" label="Itinerary" />
+              <Input name="itinerary" type="text" label="Itinerary"  width='md'/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="startDate" type="date" label="Start Date" />
+              <Input name="startDate" type="date" label="Start Date" width='md' />
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="endDate" type="date" label="End Date" />
+              <Input name="endDate" type="date" label="End Date" width='md' />
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="description" type="text" label="Description" />
+              <Input name="description" type="text" label="Description"  width='md'/>
             </div>
             <div className="w-full lg:w-[100%]">
               <label className="label">
@@ -172,9 +172,6 @@ const PostTrip = ({ session }: any) => {
     ))}
   </div>
 )}
-
-
-
           <div className="my-2">
             <button
               type="submit"

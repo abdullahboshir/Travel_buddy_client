@@ -23,7 +23,7 @@ const HomePage = async () => {
 
           <div>
             <Service />
-            <TourCard />
+            <TourCard tours={tours}/>
             <TopTours tours={tours} />
             <TourOffer />
             <ViewTours />

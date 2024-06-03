@@ -25,7 +25,7 @@ const Footer = () => {
           <Link href="/home" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">
           Home
           </Link>
-          <Link href="/checkout" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">
+          <Link href="/myProfile" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">
             Profile
           </Link>
           <Link href="/blogs" passHref className="block text-[#1de2a3] hover:text-white hover:underline mb-1">

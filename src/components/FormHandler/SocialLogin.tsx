@@ -10,7 +10,7 @@ const SocialLogin = () => {
           <div>
           <AiOutlineGoogle 
                 onClick={() => signIn('google', {
-                    callbackUrl: 'http://localhost:3000/profile'
+                    callbackUrl: 'http://localhost:3000/myProfile'
                 })} 
                 className='border border-2 text-4xl rounded-full p-[5px] hover:text-[#1de2a3] hover:text-[38px] ease-in duration-200' 
             />

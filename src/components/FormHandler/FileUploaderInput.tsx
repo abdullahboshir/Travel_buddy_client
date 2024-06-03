@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdOutlineFileUpload } from 'react-icons/md';
-import { RiFileUploadLine } from 'react-icons/ri';
+
 
 
 const FileUploaderInput = ({handleImageUpload}: any) => {

@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Header/Navbar";
 import Footer from "@/components/Footer";
 import SessionWrapper from "@/components/SessionWrapper";
-import { useSession } from "next-auth/react";
+
 
 
 

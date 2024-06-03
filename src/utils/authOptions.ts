@@ -2,6 +2,7 @@ import { config } from "@/config";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
+import { gLoginUser } from "./actions/loginUser";
 
 
 export const authOptions: NextAuthOptions = {
@@ -42,8 +43,15 @@ CredentialsProvider({
     callbacks: {
         async jwt({token, user}: {user: any, token: any}){
             if(user){
-                token.id = user.email,
-                token.accessToken = user.name
+                const userInfo = {
+                    username: user?.name,
+                    email: user?.email
+                }
+                const gUser = await gLoginUser(userInfo);
+
+
+                token.id = user?.data?.id || gUser?.data?.id,
+                token.accessToken = user?.data?.accessToken || gUser?.data?.accessToken
             }
             return token;
         },

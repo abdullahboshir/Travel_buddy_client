@@ -8,7 +8,6 @@ export const baseApi = createApi({
       getTrips: builder.query({
         query: () =>  `/trips`,
       }) 
-   
   }),
 })
 
