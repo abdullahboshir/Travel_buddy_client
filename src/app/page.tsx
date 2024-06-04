@@ -1,16 +1,14 @@
 import HomePage from "./home/page";
 
 
-
 const Home = async () => {
-
 
   return (
     
    <main>
   <div>
  
-    <HomePage/>  
+    <HomePage/>
  
   </div>
    </main>

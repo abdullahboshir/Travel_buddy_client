@@ -5,13 +5,16 @@ import InputMultiSelection from "../FormHandler/InputMultiSelection";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import FileUploaderInput from "../FormHandler/FileUploaderInput";
+import { useSession } from "next-auth/react";
 
-const PostTrip = ({ session }: any) => {
+const UpdateTrip = ({tripId}: any) => {
   const [values, setValues] = useState([]);
   const [imageURL, setImageURL] = useState<string[]>([]);
   const [files, setFiles] = useState([]);
   const [previewImgs, setPreviewImgs] = useState([]);
   const imgStorageKey = "52e2a715dfd6d706e4d4ce8b0cd8526f";
+
+  const {data: session, status}: any = useSession();
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
@@ -59,11 +62,11 @@ const PostTrip = ({ session }: any) => {
         inputData.photos = imgURLs; 
       }
   
-      const res = await fetch("http://localhost:5000/api/v1/trips/create", {
-        method: "POST",
+      const res = await fetch(`http://localhost:5000/api/v1/trips//update/${tripId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI2ZDE5NjRhLTY2MDYtNDA5Ny04OGI2LTdiNzE2YmFlNzFlNCIsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTcwNzc2MjIsImV4cCI6MTcxOTY2OTYyMn0.M6oCLor8lpgpkCoGT8ZbUNdzqbewXzDakrd1gdq_Ku0`,
+          Authorization: `Bearer ${session?.user?.accessToken}`,
         },
         body: JSON.stringify(inputData),
       });
@@ -74,7 +77,7 @@ const PostTrip = ({ session }: any) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Trip has been updated successfully",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -115,31 +118,31 @@ const PostTrip = ({ session }: any) => {
         onSubmit={handleOnSubmit}
         className="h-full flex flex-col justify-center"
       >
-        <div className={`right-0 rounded-2xl w-full lg:w-[1000px] lg:h-[500px] shadow-2xl bg-base-100 flex flex-col items-center justify-center text-black overflow-y-scroll mt-12 p-10 pt-${previewImgs.length && 52}`}>
+        <div className={`right-0 rounded-2xl w-full lg:w-[1000px] lg:h-[500px] shadow-2xl bg-base-100 flex flex-col items-center justify-center text-black overflow-y-scroll  p-10 pt-${previewImgs.length && 52}`}>
           <div className="text-black mb-6">
-            <h1 className="text-4xl font-semibold">Create a Trip</h1>
+            <h1 className="text-4xl font-semibold">Update Trip Information of </h1>
           </div>
           <div className="grid grid-cols-3 grid-flow-row gap-2 w-[100%] flex items-center justify-center">
             <div className="w-full lg:w-[100%]">
-              <Input name="destination" type="text" label="Destination"  width='md' required={true}/>
+              <Input name="destination" type="text" label="Destination"  width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="type" type="text" label="Type"  width='md' required={true}/>
+              <Input name="type" type="text" label="Type"  width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="location" type="text" label="Location"  width='md' required={true}/>
+              <Input name="location" type="text" label="Location"  width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="itinerary" type="text" label="Itinerary"  width='md' required={true}/>
+              <Input name="itinerary" type="text" label="Itinerary"  width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="startDate" type="date" label="Start Date" width='md'  required={true}/>
+              <Input name="startDate" type="date" label="Start Date" width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="endDate" type="date" label="End Date" width='md' required={true}/>
+              <Input name="endDate" type="date" label="End Date" width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
-              <Input name="description" type="text" label="Description"  width='md' required={true}/>
+              <Input name="description" type="text" label="Description"  width='md' required={false}/>
             </div>
             <div className="w-full lg:w-[100%]">
               <label className="label">
@@ -186,4 +189,4 @@ const PostTrip = ({ session }: any) => {
   );
 };
 
-export default PostTrip;
+export default UpdateTrip;

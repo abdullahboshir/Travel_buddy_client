@@ -4,6 +4,8 @@ import placeImg from '../../assets/pexels-the-world-hopper-1851481.jpg';
 import { TTour } from '@/types/tour.type';
 
 const TopTours = ({tours}: {tours: {data: TTour[]}}) => {
+
+  
     return (
         <div className='flex flex-col'>
 

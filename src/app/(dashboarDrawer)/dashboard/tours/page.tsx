@@ -1,11 +1,13 @@
-import React from 'react';
+import ToursManagement from "@/components/Management/ToursManagement";
+import React from "react";
 
-const allTours = () => {
-    return (
-        <div className='h-full w-full'>
-            <h1 className='text-4xl'>This is Tour pageeeeeeeee</h1>
-        </div>
-    );
+const ToursPage = async () => {
+  const res = await fetch("http://localhost:5000/api/v1/trips", {
+    cache: "no-store",
+  });
+  const tours = await res.json();
+
+  return <ToursManagement tours={tours}/>;
 };
 
-export default allTours;
+export default ToursPage;

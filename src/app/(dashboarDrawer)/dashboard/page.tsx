@@ -1,14 +1,9 @@
-import Tours from '@/components/Management/Tours';
-import Sidebar from '@/components/Shared/Sidebar';
+import DashboardContainer from '@/components/Management/DashboardContainer';
 import React from 'react';
 
 const DashboardPage = () => {
     return (
-        <div>
-        <Sidebar>
-            <Tours/>
-        </Sidebar>
-    </div>
+        <DashboardContainer />
     );
 };
 

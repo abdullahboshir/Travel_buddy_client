@@ -2,6 +2,7 @@ import PrivateRoute from "@/components/PrivateRoute";
 import MyProfile from "@/components/User/MyProfile";
 import { authOptions } from "@/utils/authOptions";
 import { userProfileApi } from "@/utils/getUserProfile";
+import { userTripApi } from "@/utils/userTripApi";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -26,12 +27,16 @@ const MyProfilePage = async () => {
 
   const userProfileRes = await userProfileApi(accessToken);
 
+  const userTrips = await userTripApi(accessToken);
+  console.log('userTripssssssssssssssssssssssssss', userTrips)
+
+
 
 
   return (
     <PrivateRoute>
      <div>
-        <MyProfile userProfileRes={userProfileRes}/>
+        <MyProfile userProfileRes={userProfileRes} accessToken={session.user.accessToken} userTrips={userTrips}/>
      </div>
     </PrivateRoute>
   );

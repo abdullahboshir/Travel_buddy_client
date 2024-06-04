@@ -97,10 +97,10 @@ if (status === "loading") {
                         <form onSubmit={isLogin? handleLoginOnSubmit: handleSignupOnSubmit} className="h-full flex flex-col justify-center">
 
                             {
-                                !isLogin && <Input name='username' type='text' label='Username' width='md'/> 
+                                !isLogin && <Input name='username' type='text' label='Username' width='md' required={true}/> 
                             }
-                            <Input name='email' type='email' label='Email' width='md'/>
-                            <Input name='password' type='password' label='Password' width='md'/>
+                            <Input name='email' type='email' label='Email' width='md' required={true}/>
+                            <Input name='password' type='password' label='Password'  width='md' required={true}/>
 
                         <div className='text-black hover:underline'>
                         { isLogin ?

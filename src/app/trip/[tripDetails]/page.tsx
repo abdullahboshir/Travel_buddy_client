@@ -11,7 +11,7 @@ const TravelDetailsPage = async ({params}: TParams) => {
     let tour;
 
     try {
-        const res = await fetch(`http://localhost:5000/api/v1/trips/getSingleTrip/${params.tripDetails}`, {
+        const res = await fetch(`http://localhost:5000/api/v1/trips/getSingleTrip/${params?.tripDetails}`, {
         cache: 'no-store'
     });
      tour = await res.json();
@@ -21,7 +21,7 @@ const TravelDetailsPage = async ({params}: TParams) => {
 
     return (
         <div>
-             <TripDetails data={tour.data}/>
+             <TripDetails data={tour?.data}/>
         </div>
     );
 };

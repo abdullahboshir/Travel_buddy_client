@@ -1,10 +1,25 @@
+
+
+export type TUser = {
+    bio: string;
+    username: string;
+    email: string;
+    age: number;
+    address: string;
+    contactNumber: string;
+    id: string;
+    photos?: String;
+};
+
+
 export type TTour = {
-    data: TTour[]
+    data: TUser[]
     id: string;
     destination: string;
     description: string;
     type: string;
     location: string;
+    age: number;
     itinerary: string;
     photos?: String[];
     startDate: Date;
@@ -13,4 +28,4 @@ export type TTour = {
     createdAt: Date;
     updatedAt: Date;
     userId: string;
-}
+};

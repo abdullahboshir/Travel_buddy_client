@@ -1,12 +1,11 @@
-import Tours from '@/components/Management/Tours';
 import Sidebar from '@/components/Shared/Sidebar';
 import React from 'react';
 
-const DashboardLayout = () => {
+const DashboardLayout = ({children}: any) => {
     return (
-        <div className='pt-16'>
+        <div className='pt-16 bg-white'>
             <Sidebar>
-                <Tours/>
+             {children}
             </Sidebar>
         </div>
     );

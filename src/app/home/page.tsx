@@ -5,7 +5,6 @@ import Service from "@/components/Sections/Service";
 import TopTours from "@/components/Sections/TopTours";
 import TourOffer from "@/components/Sections/TourOffer";
 import ViewTours from "@/components/Sections/ViewTours";
-import React from "react";
 
 const HomePage = async () => {
   const res = await fetch("http://localhost:5000/api/v1/trips", {
@@ -23,7 +22,7 @@ const HomePage = async () => {
 
           <div>
             <Service />
-            <TourCard tours={tours}/>
+            <TourCard tours={tours} />
             <TopTours tours={tours} />
             <TourOffer />
             <ViewTours />

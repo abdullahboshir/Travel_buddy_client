@@ -2,9 +2,9 @@ import { notFound, redirect } from 'next/navigation';
 
 
 export const userProfileApi = async (accessToken: any) => {
-
-
-  const res = await fetch('http://localhost:5000/api/v1/users/profile', {
+  try {
+   
+    const res = await fetch('http://localhost:5000/api/v1/users/profile', {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
@@ -23,10 +23,6 @@ export const userProfileApi = async (accessToken: any) => {
   // if (!token) {
   //   return false;
   // }
-
-  try {
-   
-
   } catch (error) {
     return false;
   }
