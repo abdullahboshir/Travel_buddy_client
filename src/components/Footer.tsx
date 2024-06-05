@@ -14,7 +14,7 @@ const Footer = () => {
 //   };
 
   return (
-    <footer className="bg-[#27485B] text-white flex flex-col font-raleway">
+    <footer className="bg-cyan-950 text-white flex flex-col font-raleway">
       <div className="footer-items flex justify-evenly items-center mb-8 pt-12">
         <div className="item mx-4 text-center">
           <h3 className="font-bold text-3xl">TRAVEL BUDDY</h3>

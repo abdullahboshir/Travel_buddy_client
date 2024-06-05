@@ -13,11 +13,12 @@ const TopTours = ({tours}: {tours: {data: TTour[]}}) => {
             tours?.data?.slice(1, 2).map((tour: TTour) => (
               <div key={tour.id} className='w-full lg:card-side bg-base-100 shadow-xl bg-cyan-950 flex'>
 
-              <div className='w-[50%] '>
-              <figure><Image src={placeImg} alt="Album" width={500} height={20}/></figure>
+              <div className='w-[50%] relative'>
+              <figure><Image src='https://i.ibb.co/dgKPSdW/pexels-pixabay-270859.jpg' alt="Album"             layout="fill"
+            className="object-cover rounded-none" /></figure>
               </div>
                 
-                <div className="w-[50%] flex justify-center flex-col pl-16">
+                <div className="w-[50%] h-[400px] flex justify-center flex-col pl-16">
                   <h2 className="text-4xl font-semibold text-left">{tour.destination}</h2>
                   <h2 className="text-lg text-left">5 days 4 nights</h2>
                   <p className='w-96'>{tour.description}</p>
@@ -38,7 +39,7 @@ const TopTours = ({tours}: {tours: {data: TTour[]}}) => {
               <div key={tour.id} className='w-full lg:card-side bg-base-100 shadow-xl bg-cyan-950 flex'>
 
                 
-                <div className="w-[50%] flex justify-center flex-col pl-16">
+                <div className="w-[50%] h-[400px] flex justify-center flex-col pl-16">
                   <h2 className="text-4xl font-semibold text-left">{tour.destination}</h2>
                   <h2 className="text-lg text-left">5 days 4 nights</h2>
                   <p className='w-96'>{tour.description}</p>
@@ -49,8 +50,9 @@ const TopTours = ({tours}: {tours: {data: TTour[]}}) => {
                 </div>
 
 
-                <div className='w-[50%] '>
-              <figure><Image src={placeImg} alt="Album" width={500} height={20}/></figure>
+                <div className='w-[50%] relative'>
+              <figure><Image src='https://i.ibb.co/BCmMLhx/alan-hurt-jr-Eax7a3s-VHAw-unsplash.jpg' alt="Album"  layout="fill"
+            className="object-cover rounded-none"/></figure>
               </div>
                       </div>
             ))

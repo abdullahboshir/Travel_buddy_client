@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { TTour } from "@/types/tour.type";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -6,16 +6,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-
-
-const UserTrip = ({accessToken, tours}: any) => {
-
+const UserTrip = ({ accessToken, tours }: any) => {
   const [previewImages, setPreviewImages] = useState<any>({});
   const [seeMore, setSeeMore] = useState<any>({});
 
   const { data: session, status }: any = useSession();
-
-
 
   useEffect(() => {
     const initialPreviewImages: any = {};
@@ -27,7 +22,6 @@ const UserTrip = ({accessToken, tours}: any) => {
     setPreviewImages(initialPreviewImages);
   }, [tours]);
 
-
   const handleDeleteTrip = async (id: string) => {
     Swal.fire({
       title: "Are you sure?",
@@ -36,30 +30,33 @@ const UserTrip = ({accessToken, tours}: any) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await fetch(`http://localhost:5000/api/v1/trips/delete/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${session?.user?.accessToken}`,
-          },
-          cache: 'no-store'
-        });
+        const res = await fetch(
+          `http://localhost:5000/api/v1/trips/delete/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${session?.user?.accessToken}`,
+            },
+            cache: "no-store",
+          }
+        );
 
         const tripRes = await res.json();
-        console.log('trip result', tripRes, session);
+        console.log("trip result", tripRes, session);
 
         if (tripRes && tripRes.success === true) {
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
-            icon: "success"
+            icon: "success",
           });
         }
       }
-    })
+    });
   };
 
   const setPreviewImg = (tourId: string, photo: string) => {
@@ -79,7 +76,7 @@ const UserTrip = ({accessToken, tours}: any) => {
   return (
     <div className="text-black gap-2">
       {tours?.data?.map((tour: TTour) => (
-        <div key={tour?.id} className=" mb-5">
+        <div key={tour?.id} className=" mb-10">
           <div className="flex items-start justify-start">
             <div className="">
               {previewImages[tour?.id] && (
@@ -96,7 +93,11 @@ const UserTrip = ({accessToken, tours}: any) => {
 
               <div className="flex gap-1 w-[350px]">
                 {tour?.photos?.map((photo: any, index: number) => (
-                  <div onClick={() => setPreviewImg(tour.id, photo)} key={index} className="w-10 h-10 relative cursor-pointer">
+                  <div
+                    onClick={() => setPreviewImg(tour.id, photo)}
+                    key={index}
+                    className="w-10 h-10 relative cursor-pointer"
+                  >
                     <Image
                       layout="fill"
                       objectFit="cover"
@@ -131,9 +132,14 @@ const UserTrip = ({accessToken, tours}: any) => {
                 <p className="text-cyan-500 font-semibold">Description: </p>
                 {tour?.description.length > 280 ? (
                   <p>
-                    {seeMore[tour?.id] ? tour?.description : tour?.description.slice(0, 280)}{" "}
-                    <span onClick={() => toggleSeeMore(tour?.id)} className="text-cyan-600 cursor-pointer font-bold">
-                      {seeMore[tour?.id] ? 'less' : 'see more...'}
+                    {seeMore[tour?.id]
+                      ? tour?.description
+                      : tour?.description.slice(0, 280)}{" "}
+                    <span
+                      onClick={() => toggleSeeMore(tour?.id)}
+                      className="text-cyan-600 cursor-pointer font-bold"
+                    >
+                      {seeMore[tour?.id] ? "less" : "see more..."}
                     </span>
                   </p>
                 ) : (
@@ -141,18 +147,48 @@ const UserTrip = ({accessToken, tours}: any) => {
                 )}
               </h1>
 
-              <div className={`flex justify-end ${seeMore[tour?.id] ? 'py-4' : ''} ${tour?.description?.length < 280 && 'mt-[100px]'}`}>
-                <Link href={`/trip/update-trip/${tour?.id}`} className="px-3 py-2 rounded-lg text-white bg-[#00c2ab] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition">Edit</Link>
+              <div
+                className={`flex justify-between items-center mt-5 ${
+                  seeMore[tour?.id] ? "py-4" : ""
+                } ${tour?.description?.length < 280 && "mt-[100px]"}`}
+              >
+                  <p className="text-sm flex flex-col leading-4 font-semibold">
+                  <span className="text-cyan-500">Travel Date:</span>
+                  {`${
+                    new Date(tour?.startDate).getUTCDate() < 10
+                      ? `0${new Date(tour?.startDate).getUTCDate()}`
+                      : new Date(tour?.startDate).getUTCDate()
+                  }-${
+                new Date(tour?.startDate).getUTCMonth() + 1 < 10
+                  ? `0${ new Date(tour?.startDate).getUTCMonth() + 1}`
+                  :  new Date(tour?.startDate).getUTCMonth() + 1
+              }-${new Date(tour?.startDate).getUTCFullYear()}`}
+                </p>
 
-                <button onClick={() => handleDeleteTrip(tour?.id)} className="px-3 py-2 rounded-lg text-white bg-[#ff7300] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition ml-5">Delete</button>
+                <div>
+                  <Link
+                    href={`/trip/update-trip/${tour?.id}`}
+                    className="px-[23px] py-[10px] rounded-lg text-white bg-[#00c2ab] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition"
+                  >
+                    Edit
+                  </Link>
+
+                  <button
+                    onClick={() => handleDeleteTrip(tour?.id)}
+                    className="px-3 py-2 rounded-lg text-white bg-[#ff7300] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition ml-5"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
+          <hr className="mt-10 text-gray-400 divide-y-*" />
         </div>
       ))}
     </div>
   );
 };
-
 
 export default UserTrip;

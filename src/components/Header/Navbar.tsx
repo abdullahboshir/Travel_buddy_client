@@ -32,17 +32,17 @@ const Navbar = () => {
 
   <div className="navbar-center hidden lg:flex bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full py-1 px-5">
     <ul className="menu menu-horizontal px-1 gap-7 font-bold">
-      <Link href='/home'><span className='hover:text-white hover:text-emerald-400 hover:text-[15px] ease-in duration-200'>Home</span></Link>
-      <Link href='/myProfile'><span className='hover:text-white hover:text-emerald-400 hover:text-[15px] ease-in duration-200'>My Profile</span></Link>
-      <Link href='/about'><span className='hover:text-white hover:text-emerald-400 hover:text-[15px] ease-in duration-200'>About Us</span></Link>
-      <Link href="/dashboard"><span className='hover:text-white hover:text-emerald-400 hover:text-[15px] ease-in duration-200'>Dashboard</span> </Link>
+      <Link href='/home'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Home</span></Link>
+      <Link href='/myProfile'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>My Profile</span></Link>
+      <Link href='/about'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>About Us</span></Link>
+      <Link href="/dashboard"><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Dashboard</span> </Link>
     </ul>
   </div>
 
   <div className="navbar-end mr-5">
       <div className=' bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full py-2 px-5'>
     {
-      session? <button onClick={() =>  signOut()}><span className='hover:text-white hover:text-emerald-400 hover:text-[17px] ease-in duration-200 font-bold'>Logout</span></button> : <Link href='/auth/login'><span className='hover:text-white hover:text-emerald-400 hover:text-[17px] ease-in duration-200 font-bold'>Login</span></Link>
+      session? <button onClick={() =>  signOut()}><span className='hover:text-white hover:text-cyan-400 hover:text-[17px] ease-in duration-200 font-bold'>Logout</span></button> : <Link href='/auth/login'><span className='hover:text-white hover:text-cyan-400 hover:text-[17px] ease-in duration-200 font-bold'>Login</span></Link>
     }
     </div>
   </div>

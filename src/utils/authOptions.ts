@@ -27,10 +27,12 @@ CredentialsProvider({
         
         const user = await res.json();
 
-        if(user && user.success === true){
-            return user;
+       
+        if (!res.ok || !user.success) {
+            throw new Error(user.message || 'Login failed');
         }
-        return null;
+
+        return user;
     }
 })
 ],
@@ -51,13 +53,15 @@ CredentialsProvider({
 
 
                 token.id = user?.data?.id || gUser?.data?.id,
-                token.accessToken = user?.data?.accessToken || gUser?.data?.accessToken
+                token.accessToken = user?.data?.accessToken || gUser?.data?.accessToken,
+                token.role = user?.data?.role || gUser?.data?.role
             }
             return token;
         },
         async session({ session, token }: {session: any, token: any}) {
             session.user.id = token.id;
             session.user.accessToken = token.accessToken;
+            session.user.role = token.role;
             return session;
           }
           
