@@ -21,7 +21,7 @@ const TopTours = ({tours}: {tours: {data: TTour[]}}) => {
                 <div className="w-[50%] h-[400px] flex justify-center flex-col pl-16">
                   <h2 className="text-4xl font-semibold text-left">{tour.destination}</h2>
                   <h2 className="text-lg text-left">5 days 4 nights</h2>
-                  <p className='w-96'>{tour.description}</p>
+                  <p className='w-96'>{tour.description.length > 300? tour.description.slice(0, 300) : tour.description}</p>
                   <div className="flex justify-between items-center mt-10">
                     <button className="btn bg-[#02bb96] border-none rounded-full mr-16">VIEW DETAILS</button>
                     <p className='pr-16'>$500</p>
@@ -35,7 +35,7 @@ const TopTours = ({tours}: {tours: {data: TTour[]}}) => {
 
 
 {
-            tours?.data.slice(0, 1).map(tour => (
+            tours?.data?.slice(0, 1).map(tour => (
               <div key={tour.id} className='w-full lg:card-side bg-base-100 shadow-xl bg-cyan-950 flex'>
 
                 

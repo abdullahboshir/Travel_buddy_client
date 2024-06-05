@@ -90,7 +90,7 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
               ))}
             </div>
             <div className="p-5 h-12">
-              <h3 className="text-3xl font-bold mb-3">
+              <h3 className="text-2xl font-bold mb-3">
                 {tour?.destination.length > 22
                   ? `${tour.destination.slice(0, 20)}...`
                   : tour.destination}
