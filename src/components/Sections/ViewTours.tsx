@@ -1,5 +1,4 @@
 import React from 'react';
-import viewImg from '../../assets/gettyimages-1039937216-2048x2048.jpg';
 import Image from 'next/image';
 
 
@@ -9,7 +8,7 @@ const ViewTours = () => {
 <div className='flex flex-col-reverse'>
     <div className="relative justify-center items-center w-full image-full">
 
-<div className='w-full'><Image src={viewImg} width={1000} height={1000} alt="traveling image" className='w-full h-[750px]'/></div>
+<div className='w-full'><Image src='https://i.ibb.co/xCx1By0/gettyimages-1039937216-2048x2048.jpg' width={500} height={500} alt="traveling image" className='w-full h-[750px]'/></div>
 
 <div className="absolute right-24 top-52">
   <h2 className="text-3xl font-bold ">Top Travelling Destinations</h2>

@@ -1,7 +1,7 @@
 
 
 export const travelRequestApi = async (formData: any) => {
-    const res = await fetch(`http://localhost:5000/api/v1/trips/${formData?.tripId}/request`, {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/trips/${formData?.tripId}/request`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

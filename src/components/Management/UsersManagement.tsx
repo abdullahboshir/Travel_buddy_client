@@ -1,4 +1,5 @@
 "use client";
+import { baseApi } from "@/app/api/baseApi";
 import { TUser } from "@/types/tour.type";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -22,7 +23,7 @@ const UsersManagement = ({ users, accessToken }: any) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/users/admin/update/${id}`,
+        `${baseApi}/api/v1/users/admin/update/${id}`,
         {
           method: "PUT",
           headers: {

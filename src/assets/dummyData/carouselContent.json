@@ -1,0 +1,20 @@
+[
+    {
+        "slide": 1,
+        "title": "IT'S TIME FOR A NEW JOURNEY",
+       "description": "Enjoy the journey and try to get better every day. And don't lose the passion and the love for what you do.",
+       "img": "https://i.ibb.co/p3wcJgd/slider-img1.jpg" 
+    },
+    {
+        "slide": 3,
+        "title": "PLEASURE TO TRAVEL WITH FAMILY",
+       "description": "Build traditions of family vacations and trips and outings. These memories will never be forgotten by your children.",
+       "img": "https://i.ibb.co/4mXGyxR/slider-img3.jpg"
+    },
+    {
+        "slide": 2,
+        "title":   "THE PLACE FOR YOUR ENJOYMENT",
+       "description": "The journey of a thousand miles begins with a single step.",
+       "img": "https://i.ibb.co/mDv7R3d/slider-img2.jpg"
+    }
+]

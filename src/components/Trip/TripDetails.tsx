@@ -1,6 +1,5 @@
 'use client'
 import { TTour } from "@/types/tour.type";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 

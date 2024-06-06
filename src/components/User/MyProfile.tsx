@@ -1,9 +1,9 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
-import { MdCloudUpload } from "react-icons/md";
 import Swal from "sweetalert2";
-import UserTrip from "../Trip/UserTrip";
+import { baseApi } from "@/app/api/baseApi";
+import UpdateTrip from "../Trip/UpdateTrip";
+import UserTripPost from "../Trip/UserTrip";
 
 const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
   const [isEditProfile, setIsEditProfile] = useState(false);
@@ -74,7 +74,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
 
       inputData.profilePhoto = imageURL;
       const res = await fetch(
-        `http://localhost:5000/api/v1/users//update/${userProfileRes?.data?.id}`,
+        `${baseApi}/api/v1/users//update/${userProfileRes?.data?.id}`,
         {
           method: "PUT",
           headers: {
@@ -141,13 +141,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
     }
   };
 
-  const handleEdit = (order: any) => {
-    if (order === "edit") {
-      setIsEditProfile(true);
-    } else if (order === "update") {
-      setIsEditProfile(false);
-    }
-  };
+
 
   const handleProfileState = (name: any) => {
     if(name === 'edit'){
@@ -172,8 +166,9 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
       <div className="bg-gray-200 w-full min-h-screen flex justify-center items-center pt-20 pb-28">
         <div className="w-full min-h-screen flex justify-center items-start gap-5">
           <div className="w-[280px] min-h-screen bg-white rounded-lg"></div>
+          
           <div className="w-[900px] min-h-screen bg-white rounded-lg">
-            <div className="h-16 w-full bg-gray-200 flex gap-5">
+            <div className="h-10 w-full bg-gray-200 flex gap-5">
               <button
                 onClick={() => handleProfileState('travelPost')}
                 className={`h-full px-5 text-black ${
@@ -201,12 +196,12 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
             </div>
             {edit && (
               <div className="w-full bg-white text-black">
-                <h1>This is Edit Page</h1>
+                <UpdateTrip />
               </div>
             )}
             {travelPost && (
               <div className="w-full bg-white text-black pb-10">
-              <UserTrip accessToken={accessToken} tours={userTrips}/>
+              <UserTripPost accessToken={accessToken} userTrips={userTrips} handleProfileState={handleProfileState}/>
             </div>
           )}
           {requestHistory && (

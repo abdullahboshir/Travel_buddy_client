@@ -36,7 +36,7 @@ const ToursManagement = ({ tours }: any) => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await fetch(`http://localhost:5000/api/v1/trips/delete/${id}`, {
+        const res = await fetch(`${process.env.BACKEND_URL}/api/v1/trips/delete/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

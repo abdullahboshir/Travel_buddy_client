@@ -7,7 +7,7 @@ import TourOffer from "@/components/Sections/TourOffer";
 import ViewTours from "@/components/Sections/ViewTours";
 
 const HomePage = async () => {
-  const res = await fetch("http://localhost:5000/api/v1/trips", {
+  const res = await fetch(`${process.env.BACKEND_URL}/api/v1/trips`, {
     cache: "no-store",
   });
   const tours = await res.json();

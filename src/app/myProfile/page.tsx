@@ -28,9 +28,6 @@ const MyProfilePage = async () => {
   const userProfileRes = await userProfileApi(accessToken);
 
   const userTrips = await userTripApi(accessToken);
-  console.log('userTripssssssssssssssssssssssssss', userTrips)
-
-
 
 
   return (

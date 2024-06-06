@@ -1,4 +1,5 @@
 "use client";
+import { baseApi } from "@/app/api/baseApi";
 import { TTour } from "@/types/tour.type";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,10 +10,10 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
 
   const handleOnSearching = async (e: any) => {
     const searchTerm = e.target.value;
-    console.log("searchable value got", searchTerm);
+  
 
     const res = await fetch(
-      `http://localhost:5000/api/v1/trips?searchTerm=${searchTerm}`,
+      `${baseApi}/api/v1/trips?searchTerm=${searchTerm}`,
       {
         method: "GET",
         headers: {
@@ -23,7 +24,7 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
     );
 
     const queryValue = await res.json();
-    console.log('dataaaaaaaaaaaaaaa', queryValue)
+
     setToursData(queryValue);
   };
 

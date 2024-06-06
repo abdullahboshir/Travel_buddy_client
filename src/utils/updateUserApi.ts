@@ -2,7 +2,7 @@
 const updateUserApi = async (id: string, accessToken: string, data: any) => {
     try {
         const res = await fetch(
-            `http://localhost:5000/api/v1/users//update/${id}`,
+            `${process.env.BACKEND_URL}/api/v1/users//update/${id}`,
             {
               method: "PUT",
               headers: {

@@ -1,49 +1,26 @@
-'use client';
-import Image from 'next/image';
+'use client'
 import React, { useEffect, useState } from 'react';
-import image1 from '../../assets/carousel_img/slider-img1.jpg';
-import image2 from '../../assets/carousel_img/slider-img2.jpg';
-import image3 from '../../assets/carousel_img/slider-img3.jpg';
+import Image from 'next/image';
 import Link from 'next/link';
+import slidesContent  from '../../assets/dummyData/carouselContent.json';
 
-const Silder = () => {
+const Slider = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const slidesImg = [image1, image3, image2];
-    const slidesContent = [
-        {
-            slide: 1,
-            title: "IT'S TIME FOR A NEW JOURNEY",
-            description: "Enjoy the journey and try to get better every day. And don't lose the passion and the love for what you do.",
-            img: image1 
-        },
-        {
-            slide: 3,
-            title: "PLEASURE TO TRAVEL WITH FAMILY",
-            description: "Build traditions of family vacations and trips and outings. These memories will never be forgotten by your children.",
-           img: image3
-        },
-        {
-            slide: 2,
-            title:   "THE PLACE FOR YOUR ENJOYMENT",
-           description: "The journey of a thousand miles begins with a single step.",
-          img: image2
-        }
-    ]
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentSlide((prevSlide) => (prevSlide === slidesImg.length - 1 ? 0 : prevSlide + 1));
+            setCurrentSlide(prevSlide => (prevSlide === slidesContent.length - 1 ? 0 : prevSlide + 1));
         }, 10000);
 
         return () => clearInterval(interval);
-    }, [slidesImg.length]);
+    }, [slidesContent.length]);
 
     const handlePrevClick = () => {
-        setCurrentSlide((prevSlide) => (prevSlide === 0 ? slidesImg.length - 1 : prevSlide - 1));
+        setCurrentSlide(prevSlide => (prevSlide === 0 ? slidesContent.length - 1 : prevSlide - 1));
     };
 
     const handleNextClick = () => {
-        setCurrentSlide((prevSlide) => (prevSlide === slidesImg.length - 1 ? 0 : prevSlide + 1));
+        setCurrentSlide(prevSlide => (prevSlide === slidesContent.length - 1 ? 0 : prevSlide + 1));
     };
 
     return (
@@ -73,4 +50,4 @@ const Silder = () => {
     );
 };
 
-export default Silder;
+export default Slider;

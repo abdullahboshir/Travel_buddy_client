@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import Image from "next/image";
 import FileUploaderInput from "../FormHandler/FileUploaderInput";
 import { useSession } from "next-auth/react";
+import { baseApi } from "@/app/api/baseApi";
 
 const UpdateTrip = ({tripId}: any) => {
   const [values, setValues] = useState([]);
@@ -62,7 +63,7 @@ const UpdateTrip = ({tripId}: any) => {
         inputData.photos = imgURLs; 
       }
   
-      const res = await fetch(`http://localhost:5000/api/v1/trips//update/${tripId}`, {
+      const res = await fetch(`${baseApi}/api/v1/trips//update/${tripId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -113,15 +114,13 @@ const UpdateTrip = ({tripId}: any) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-200">
+    <div className="flex justify-center items-center bg-gray-200">
       <form
         onSubmit={handleOnSubmit}
         className="h-full flex flex-col justify-center"
       >
-        <div className={`right-0 rounded-2xl w-full lg:w-[1000px] lg:h-[500px] shadow-2xl bg-base-100 flex flex-col items-center justify-center text-black overflow-y-scroll  p-10 pt-${previewImgs.length && 52}`}>
-          <div className="text-black mb-6">
-            <h1 className="text-4xl font-semibold">Update Trip Information of </h1>
-          </div>
+        <div className={`right-0 lg:w-[900px] lg:h-[500px] bg-base-100 flex flex-col items-center justify-start text-black p-10 pt-${previewImgs.length && 52}`}>
+        
           <div className="grid grid-cols-3 grid-flow-row gap-2 w-[100%] flex items-center justify-center">
             <div className="w-full lg:w-[100%]">
               <Input name="destination" type="text" label="Destination"  width='md' required={false}/>

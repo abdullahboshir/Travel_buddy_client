@@ -8,7 +8,7 @@ export const userTripApi = async (accessToken: any) => {
             return 'Access Token not found'
         };
      
-      const res = await fetch('http://localhost:5000/api/v1/trips/getUserTrip', {
+      const res = await fetch(`${process.env.BACKEND_URL}/api/v1/trips/getUserTrip`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,6 @@ export const userTripApi = async (accessToken: any) => {
         return notFound();
     };
     const userInfo = await res.json();
-    console.log('ressssssssssssssssss', res, userInfo)
     return userInfo;
   
     } catch (error: any) {

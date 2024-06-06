@@ -4,7 +4,7 @@ type TInputProps = {
     name: string;
     type: string;
     label: string;
-    width: string;
+    width: string | boolean;
     required: boolean;
 }
 

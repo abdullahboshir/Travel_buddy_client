@@ -19,7 +19,7 @@ CredentialsProvider({
     },
     async authorize(credentials, req) {
     
-        const res = await fetch(`${config.env.backend_url}/auth/login`, {
+        const res = await fetch(`${process.env.BACKEND_URL}/api/v1/auth/login`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" }
@@ -50,8 +50,7 @@ CredentialsProvider({
                     email: user?.email
                 }
                 const gUser = await gLoginUser(userInfo);
-
-
+                
                 token.id = user?.data?.id || gUser?.data?.id,
                 token.accessToken = user?.data?.accessToken || gUser?.data?.accessToken,
                 token.role = user?.data?.role || gUser?.data?.role

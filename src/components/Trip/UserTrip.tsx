@@ -1,17 +1,48 @@
 "use client";
+import { baseApi } from "@/app/api/baseApi";
 import { TTour } from "@/types/tour.type";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
+import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-const UserTrip = ({ accessToken, tours }: any) => {
+const UserTripPost = ({ accessToken, userTrips, handleProfileState }: any) => {
   const [previewImages, setPreviewImages] = useState<any>({});
   const [seeMore, setSeeMore] = useState<any>({});
+  const [tours, setTours] = useState<any>(userTrips || []);
 
-  const { data: session, status }: any = useSession();
+  const refetchTours = async (token: any) => {
 
+    try {
+      if (!token) {
+        return 'Access Token not found';
+      }
+
+
+      const res = await fetch(`${baseApi}/api/v1/trips/getUserTrip`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        cache: 'no-store'
+      });
+   
+
+      if (!res.ok) {
+        console.error('Failed to fetch user trips', res.statusText);
+        return notFound();
+      }
+
+      const userInfo = await res.json();
+      return userInfo;
+    } catch (error: any) {
+      console.error('Error fetching user trips:', error.message);
+      return null;
+    }
+  };
+
+  
   useEffect(() => {
     const initialPreviewImages: any = {};
     tours?.data?.forEach((tour: any) => {
@@ -33,26 +64,41 @@ const UserTrip = ({ accessToken, tours }: any) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await fetch(
-          `http://localhost:5000/api/v1/trips/delete/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${session?.user?.accessToken}`,
-            },
-            cache: "no-store",
+        const res = await fetch(`${baseApi}/api/v1/trips/delete/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          cache: "no-store",
+        });
+
+        if (res.ok) {
+          const tripRes = await res.json();
+
+          if (tripRes.success === true) {
+            const tripsData = await refetchTours(accessToken);
+            setTours(tripsData);
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: `Failed to delete!`,
+              footer: `FORBIDDEN!`
+            });
           }
-        );
-
-        const tripRes = await res.json();
-        console.log("trip result", tripRes, session);
-
-        if (tripRes && tripRes.success === true) {
+        } else {
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success",
+            icon: "error",
+            title: "Oops...",
+            text: `Failed to delete!`,
+            footer: `FORBIDDEN!`
           });
         }
       }
@@ -152,26 +198,26 @@ const UserTrip = ({ accessToken, tours }: any) => {
                   seeMore[tour?.id] ? "py-4" : ""
                 } ${tour?.description?.length < 280 && "mt-[100px]"}`}
               >
-                  <p className="text-sm flex flex-col leading-4 font-semibold">
+                <p className="text-sm flex flex-col leading-4 font-semibold">
                   <span className="text-cyan-500">Travel Date:</span>
                   {`${
                     new Date(tour?.startDate).getUTCDate() < 10
                       ? `0${new Date(tour?.startDate).getUTCDate()}`
                       : new Date(tour?.startDate).getUTCDate()
                   }-${
-                new Date(tour?.startDate).getUTCMonth() + 1 < 10
-                  ? `0${ new Date(tour?.startDate).getUTCMonth() + 1}`
-                  :  new Date(tour?.startDate).getUTCMonth() + 1
-              }-${new Date(tour?.startDate).getUTCFullYear()}`}
+                    new Date(tour?.startDate).getUTCMonth() + 1 < 10
+                      ? `0${new Date(tour?.startDate).getUTCMonth() + 1}`
+                      : new Date(tour?.startDate).getUTCMonth() + 1
+                  }-${new Date(tour?.startDate).getUTCFullYear()}`}
                 </p>
 
                 <div>
-                  <Link
-                    href={`/trip/update-trip/${tour?.id}`}
+                  <button
+                    onClick={() => handleProfileState('edit')}
                     className="px-[23px] py-[10px] rounded-lg text-white bg-[#00c2ab] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition"
                   >
                     Edit
-                  </Link>
+                  </button>
 
                   <button
                     onClick={() => handleDeleteTrip(tour?.id)}
@@ -191,4 +237,4 @@ const UserTrip = ({ accessToken, tours }: any) => {
   );
 };
 
-export default UserTrip;
+export default UserTripPost;

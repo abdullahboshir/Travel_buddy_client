@@ -6,7 +6,7 @@ import TourCard from './Cards/TourCard';
 import TourOffer from './Sections/TourOffer';
 import ViewTours from './Sections/ViewTours';
 import Footer from './Footer';
-import { TTour } from '@/types/tour.type';
+
 
 const Container = ({tours}: {tours: any}) => {
     return (

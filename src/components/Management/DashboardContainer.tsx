@@ -1,10 +1,10 @@
 import React from 'react';
 import ToursManagement from './ToursManagement';
 
-const DashboardContainer = () => {
+const DashboardContainer = ({tours}: any) => {
     return (
         <div className='text-black'>
-            <ToursManagement/>
+            <ToursManagement tours={tours}/>
         </div>
     );
 };

@@ -1,6 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react';
-import icon from '../../assets/icons/313418393_513873044086941_9155546839920974588_n1.png';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {signOut, useSession } from 'next-auth/react';
@@ -8,8 +7,7 @@ import {signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
 
-  const { data: session, status } = useSession();
-  console.log('sessing is came', session)
+  const { data: session, status } = useSession() as any;
 
 
 
@@ -25,8 +23,8 @@ const Navbar = () => {
   <div className="navbar">
 
   <div className="navbar-start">
-   <div className='bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full flex justify-center items-center p-2 ml-5 ease-in duration-200'>
-   <a className=" z-30 w-[50px] hover:w-[55px] ease-in duration-200"><Image src={icon} width={100} height={100} alt='logo' /></a>
+   <div className='bg-black bg-opacity-30 backdrop-blur-sm text-white rounded-full flex justify-center items-center py-[10px] px-5 ml-5 ease-in duration-200'>
+   <Link href='/' className=" z-30 w-[90px] hover:w-[95px] ease-in duration-200"><Image src='https://i.ibb.co/48bxVzk/wayfarer-logo-Photoroom.png' width={100} height={100} alt='logo' /></Link>
    </div>
   </div>
 
@@ -35,7 +33,9 @@ const Navbar = () => {
       <Link href='/home'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Home</span></Link>
       <Link href='/myProfile'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>My Profile</span></Link>
       <Link href='/about'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>About Us</span></Link>
-      <Link href="/dashboard"><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Dashboard</span> </Link>
+      { session?.user?.role && 
+        <Link href="/dashboard"><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Dashboard</span> </Link>
+      }
     </ul>
   </div>
 
