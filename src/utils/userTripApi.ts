@@ -1,3 +1,4 @@
+import { baseApi } from "@/app/api/baseApi";
 import { notFound } from "next/navigation";
 
 
@@ -8,7 +9,7 @@ export const userTripApi = async (accessToken: any) => {
             return 'Access Token not found'
         };
      
-      const res = await fetch(`${process.env.BACKEND_URL}/api/v1/trips/getUserTrip`, {
+      const res = await fetch(`${baseApi}/api/v1/trips/getUserTrip`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

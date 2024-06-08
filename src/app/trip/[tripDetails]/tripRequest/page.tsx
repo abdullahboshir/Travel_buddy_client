@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { notFound, redirect } from "next/navigation";
 import PrivateRoute from "@/components/PrivateRoute";
+import { baseApi } from "@/app/api/baseApi";
 
 const TripRequestPage = async ({ params }: any) => {
   const session = (await getServerSession(authOptions)) as any;
@@ -25,7 +26,7 @@ const TripRequestPage = async ({ params }: any) => {
   let userProfile;
   let userInfo;
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/users/profile`, {
+    const res = await fetch(`${baseApi}/api/v1/users/profile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +54,6 @@ const TripRequestPage = async ({ params }: any) => {
 
   if (
     !userProfile ||
-    !userProfile.age ||
     !userProfile.contactNumber ||
     !userProfile.address
   ) {

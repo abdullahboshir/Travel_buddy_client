@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/utils/authOptions';
 import { redirect } from 'next/navigation';
 import { userProfileApi } from '@/utils/getUserProfile';
+import { baseApi } from '@/app/api/baseApi';
 
 const UsersManagementPage = async () => {
 
@@ -29,7 +30,7 @@ const UsersManagementPage = async () => {
 
     let users;
     try {
-        const res = await fetch(`${process.env.BACKEND_URL}/api/v1/users/getUsers`, {
+        const res = await fetch(`${baseApi}/api/v1/users/getUsers`, {
         cache: 'no-store'
     });
      users = await res.json();

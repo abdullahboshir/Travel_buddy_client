@@ -1,17 +1,18 @@
-import React from 'react';
-import Silder from './Hero/Silder';
-import Service from './Sections/Service';
-import TopTours from './Sections/TopTours';
-import TourCard from './Cards/TourCard';
-import TourOffer from './Sections/TourOffer';
-import ViewTours from './Sections/ViewTours';
-import Footer from './Footer';
+"use client";
+import React from "react";
+import Silder from "./Hero/Silder";
+import Service from "./Sections/Service";
+import TopTours from "./Sections/TopTours";
+import TourCard from "./Cards/TourCard";
+import TourOffer from "./Sections/TourOffer";
+import ViewTours from "./Sections/ViewTours";
+import Footer from "./Footer";
 
+const Container = ({ tours }: { tours: any }) => {
 
-const Container = ({tours}: {tours: any}) => {
-    return (
-        <div>
-            <div className="relative h-full">
+  return (
+    <div>
+      <div className="relative h-full">
         <div className="absolute left-0 top-0 z-10">
           <div>
             <Silder />
@@ -19,7 +20,7 @@ const Container = ({tours}: {tours: any}) => {
 
           <div>
             <Service />
-            <TourCard tours={tours}/>
+            <TourCard tours={tours} />
             <TopTours tours={tours} />
             <TourOffer />
             <ViewTours />
@@ -30,8 +31,8 @@ const Container = ({tours}: {tours: any}) => {
           </div>
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Container;

@@ -6,5 +6,10 @@ export const config = {
     "/myProfile",
     "/trip/create-trip",
     `/trip/:path*`,
+    "/auth/change-password",
+    
   ],
 };
+
+
+

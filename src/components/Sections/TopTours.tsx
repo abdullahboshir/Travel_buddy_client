@@ -12,7 +12,7 @@ const TopTours = ({ tours }: { tours: { data: TTour[] } }) => {
         >
           <div className="w-[50%] relative">
             {tours?.data?.map((data) =>
-              data?.photos?.slice(0, 1).map((photo, index) => (
+              data?.photos?.slice(1, 2).map((photo, index) => (
                 <figure key={index}>
                   <Image
                     src={`${
@@ -43,7 +43,7 @@ const TopTours = ({ tours }: { tours: { data: TTour[] } }) => {
               <button className="btn bg-[#02bb96] border-none rounded-full mr-16">
                 VIEW DETAILS
               </button>
-              <p className="pr-16">$500</p>
+              <p className="pr-16 font-semibold">$999</p>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@ const TopTours = ({ tours }: { tours: { data: TTour[] } }) => {
 
      
 
-      {tours?.data?.slice(0, 1).map((tour) => (
+      {tours?.data?.slice(1, 2).map((tour) => (
         <div
           key={tour.id}
           className="w-full lg:card-side bg-base-100 shadow-xl bg-cyan-950 flex"
@@ -66,13 +66,13 @@ const TopTours = ({ tours }: { tours: { data: TTour[] } }) => {
               <button className="btn bg-[#02bb96] border-none rounded-full mr-16">
                 VIEW DETAILS
               </button>
-              <p className="pr-16">$500</p>
+              <p className="pr-16 font-semibold">$1099</p>
             </div>
           </div>
 
           <div className="w-[50%] relative">
             {tours?.data?.map((data) =>
-              data?.photos?.slice(0, 1).map((photo, index) => (
+              data?.photos?.slice(1, 2).map((photo, index) => (
                 <figure key={index}>
                   <Image
                     src={`${

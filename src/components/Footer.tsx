@@ -7,17 +7,12 @@ import { AiOutlineYahoo, AiFillFacebook, AiOutlineTwitter, AiFillInstagram, AiFi
 import Link from 'next/link';
 
 const Footer = () => {
-//   const router = useRouter();
-
-//   const navigateTo = (path) => {
-//     router.push(path);
-//   };
 
   return (
-    <footer className="bg-cyan-950 text-white flex flex-col font-raleway">
+    <div className="bg-cyan-950 text-white flex flex-col font-raleway">
       <div className="footer-items flex justify-evenly items-center mb-8 pt-12">
         <div className="item mx-4 text-center">
-          <h3 className="font-bold text-3xl">TRAVEL BUDDY</h3>
+          <h3 className="font-bold text-3xl">WAYFARER</h3>
           <p className="text-lg text-[#1de2a3] hover:text-white">It is time for a new journey</p>
         </div>
         <div className="item mx-4">
@@ -64,11 +59,11 @@ const Footer = () => {
         </div>
         <div className="social-caption text-center text-lg">
           <small>
-            &copy; {new Date().getFullYear()} Travel Sense <span className="inline-block mx-2">|</span> <span className="hover:underline">Privacy Policy</span>
+            &copy; {new Date().getFullYear()} Wayfarer <span className="inline-block mx-2">|</span> <span className="hover:underline">Privacy Policy</span>
           </small>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 

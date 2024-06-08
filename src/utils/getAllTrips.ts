@@ -1,10 +1,11 @@
+import { baseApi } from '@/app/api/baseApi';
 import { notFound, redirect } from 'next/navigation';
 
 
 export const getAllTrips = async () => {
   try {
    
-    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/trips`, {
+    const res = await fetch(`${baseApi}/api/v1/trips`, {
       cache: 'no-store'
   });
 

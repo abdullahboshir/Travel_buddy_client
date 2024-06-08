@@ -1,8 +1,9 @@
+import { baseApi } from "@/app/api/baseApi";
 
 const updateUserApi = async (id: string, accessToken: string, data: any) => {
     try {
         const res = await fetch(
-            `${process.env.BACKEND_URL}/api/v1/users//update/${id}`,
+            `${baseApi}/api/v1/users//update/${id}`,
             {
               method: "PUT",
               headers: {

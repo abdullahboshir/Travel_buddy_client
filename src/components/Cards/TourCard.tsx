@@ -35,10 +35,11 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
 
 
   return (
-    <div className="flex flex-col items-center bg-base-100 shadow-xl bg-gray-200 p-8">
+    <div className="flex w-full flex-col items-center bg-base-100 shadow-xl bg-gray-200 p-8 pt-0">
+      <button className="px-5 py-2 -mt-5 z-50 text-lg rounded-lg bg-[#00c2ab] border-none text-white font-semibold hover:text-black hover:text-white hover:border-0 hover:text-[18px] font-semibold hover:font-bold ease-in duration-100">Share Your Trip</button>
       <div className="w-full flex justify-center items-center flex-col text-black mb-8">
+        <h1 className="text-5xl font-semibold text-[#00c2ab] my-10">FIND TOUR DESIRE TOUR</h1>
         <div className="w-96">
-        
             <div className="join">
               <input
                 type="text"
@@ -122,9 +123,9 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
         ))}
       </div>
 
-      <button className="px-3 py-2 rounded-lg text-white bg-[#00c2ab] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition my-10">
+      <Link href='/trip/allTrips' className="px-3 py-2 rounded-lg text-white bg-[#00c2ab] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition my-10">
         See more..
-      </button>
+      </Link>
     </div>
   );
 };

@@ -62,11 +62,6 @@ const UsersManagement = ({ users, accessToken }: any) => {
         <table className="table">
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
               <th>User Name</th>
               <th>Email</th>
               <th>Role</th>
@@ -80,11 +75,7 @@ const UsersManagement = ({ users, accessToken }: any) => {
            
             {users?.data?.map((user: any) => (
               <tr key={user?.id}>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
+               
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">

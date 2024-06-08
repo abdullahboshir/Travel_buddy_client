@@ -1,10 +1,11 @@
+import { baseApi } from '@/app/api/baseApi';
 import { notFound, redirect } from 'next/navigation';
 
 
 export const userProfileApi = async (accessToken: any) => {
   try {
    
-    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/users/profile`, {
+    const res = await fetch(`${baseApi}/api/v1/users/profile`, {
       method: 'GET',
       headers: {
           'Content-Type': 'application/json',
@@ -27,3 +28,6 @@ export const userProfileApi = async (accessToken: any) => {
     return false;
   }
 }
+
+
+

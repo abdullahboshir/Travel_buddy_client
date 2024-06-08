@@ -3,7 +3,7 @@ import React from 'react';
 
 const Sidebar = ({ children }: any) => {
     return (
-        <div className='bg-white'>
+        <div className='bg-white mt-5'>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-center justify-center">

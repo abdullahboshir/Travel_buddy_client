@@ -3,19 +3,28 @@ import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {signOut, useSession } from 'next-auth/react';
+import Spinner from '../Spinner';
+import { usePathname } from 'next/navigation'
 
 
 const Navbar = () => {
 
   const { data: session, status } = useSession() as any;
 
+ 
+    const pathname = usePathname()
+console.log('current router ddddddddddd', pathname)
 
+console.log('is admin?' , session)
 
   useEffect(() => {
     if (status === "unauthenticated") {
       <Link href='/auth/login' />
     }
   }, [status]);
+
+  
+
 
 
     return (
@@ -33,7 +42,7 @@ const Navbar = () => {
       <Link href='/home'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Home</span></Link>
       <Link href='/myProfile'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>My Profile</span></Link>
       <Link href='/about'><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>About Us</span></Link>
-      { session?.user?.role && 
+      { session?.user?.role === 'ADMIN' && 
         <Link href="/dashboard"><span className='hover:text-white hover:text-cyan-400 hover:text-[15px] ease-in duration-200'>Dashboard</span> </Link>
       }
     </ul>

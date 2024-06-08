@@ -5,9 +5,6 @@ import Navbar from "@/components/Header/Navbar";
 import Footer from "@/components/Footer";
 import SessionWrapper from "@/components/SessionWrapper";
 
-
-
-
 const raleway = Raleway({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,29 +17,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <SessionWrapper>
-    <html lang="en"  data-theme="light">
-      <body className={raleway.className}>
-      <div className="relative ">
+      <html lang="en" data-theme="light">
+        <body className={raleway.className}>
+          <div>
+            <div className="relative">
+              <div className="absolute left-0 top-0 w-full z-20">
+                <Navbar />
+              </div>
 
-      <div className='absolute left-0 top-0 w-full z-20'>
-          <Navbar/>
+              <div>{children}</div>
+
+            </div>
+            
+            <div>
+                <Footer />
+              </div>
           </div>
 
-        <div>
-        {children}
-        </div>
 
-        <div>
-        <Footer/>
-        </div>
-
-      </div>
-      </body>
-    </html>
+        </body>
+      </html>
     </SessionWrapper>
   );
 }

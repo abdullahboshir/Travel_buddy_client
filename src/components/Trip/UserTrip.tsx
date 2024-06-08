@@ -11,6 +11,7 @@ const UserTripPost = ({ accessToken, userTrips, handleProfileState }: any) => {
   const [seeMore, setSeeMore] = useState<any>({});
   const [tours, setTours] = useState<any>(userTrips || []);
 
+
   const refetchTours = async (token: any) => {
 
     try {
@@ -232,7 +233,7 @@ const UserTripPost = ({ accessToken, userTrips, handleProfileState }: any) => {
 
           <hr className="mt-10 text-gray-400 divide-y-*" />
         </div>
-      ))}
+      ))} 
     </div>
   );
 };
