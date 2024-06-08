@@ -61,7 +61,9 @@ const TopTours = ({ tours }: { tours: { data: TTour[] } }) => {
               {tour.destination}
             </h2>
             <h2 className="text-lg text-left">5 days 4 nights</h2>
-            <p className="w-96">{tour.description}</p>
+            <p className="w-96">{tour.description.length > 300
+                ? tour.description.slice(0, 300)
+                : tour.description}</p>
             <div className="flex justify-between items-center mt-10">
               <button className="btn bg-[#02bb96] border-none rounded-full mr-16">
                 VIEW DETAILS
