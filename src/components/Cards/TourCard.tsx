@@ -7,12 +7,11 @@ import { useEffect, useState } from "react";
 
 const TourCard = ({ tours }: {tours: TTour[]}) => {
   const [toursData, setToursData] = useState<any | TTour[]>(tours || []);
-  const [sortBy, setSortBy] = useState('');
+
 
 
   const handleOnSearching = async (e: any) => {
     const searchTerm = e.target.value;
-
 
     const res = await fetch(
       `${baseApi}/api/v1/trips?searchTerm=${searchTerm}`,
@@ -37,33 +36,6 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
 
 
 
-
-  const handleOnFilter = async (e: any) => {
-    const sortBy = e.target.value;
-    console.log('eeeeeeeeeeeeeeeeeeeeeee', sortBy)
-
-    const res = await fetch(
-      `${baseApi}/api/v1/trips?sortBy=${sortBy}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      }
-    );
-
-    const queryValue = await res.json();
-
-    setToursData(queryValue);
-  };
-
-
-  useEffect(() => {
-    setToursData(tours)
-  }, [tours]);
-
-
   const tourLength = toursData?.data?.length > 9 ? toursData?.data?.slice(0, 9) : toursData?.data;
 
 
@@ -83,7 +55,7 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
                 className="input input-bordered join-item"
                 placeholder="Search"
               />
-              <select onChange={handleOnFilter} className="select select-bordered join-item">
+              <select onChange={handleOnSearching} className="select select-bordered join-item">
                 <option disabled selected>
                   Filter
                 </option>
@@ -92,7 +64,7 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
                 </option>
                 <option>Nature</option>
                 <option>Adventure</option>
-                <option>Cultural</option>
+                <option>Culture</option>
                 <option className="font-bold" disabled>
                   Continent
                 </option>

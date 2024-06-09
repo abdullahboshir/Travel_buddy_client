@@ -28,4 +28,12 @@ export type TTour = {
     createdAt: Date;
     updatedAt: Date;
     userId: string;
+    meta: TMeta
 };
+
+
+type TMeta = {
+    total: number;
+    page: number;
+    limit: number;
+}

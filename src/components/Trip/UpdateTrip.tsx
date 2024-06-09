@@ -21,7 +21,6 @@ const UpdateTrip = ({ tripId }: any) => {
 
   const { data: session, status }: any = useSession();
 
-  console.log('valid urllllllllllll', `${baseApi}/api/v1/trips/update/${tripId}`);
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
@@ -133,9 +132,7 @@ const UpdateTrip = ({ tripId }: any) => {
         className="h-full flex flex-col justify-center"
       >
         <div
-          className={`right-0 lg:w-[900px] bg-white lg:h-[500px] bg-base-100 flex flex-col items-center justify-start text-black p-10 pt-${
-            previewImgs.length && 52
-          } shadow-lg rounded-lg`}
+          className={`right-0 lg:w-[900px] bg-white ${previewImgs.length? 'lg:h-[560px]' : 'lg:h-[500px]' } bg-base-100 flex flex-col items-center justify-start text-black p-10 pt-${previewImgs.length? 52 : 16 } shadow-lg rounded-lg`}
         >
           <div className="grid grid-cols-3 grid-flow-row gap-2 w-[100%] flex items-center justify-center">
             <div className="w-full lg:w-[100%]">

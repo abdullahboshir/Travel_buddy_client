@@ -8,7 +8,7 @@ import TourOffer from "./Sections/TourOffer";
 import ViewTours from "./Sections/ViewTours";
 import Footer from "./Footer";
 
-const Container = ({ tours }: { tours: any }) => {
+const Container = ({ initialTours }: { initialTours: any }) => {
 
   return (
     <div>
@@ -20,8 +20,8 @@ const Container = ({ tours }: { tours: any }) => {
 
           <div>
             <Service />
-            <TourCard tours={tours} />
-            <TopTours tours={tours} />
+            <TourCard tours={initialTours} />
+            <TopTours tours={initialTours} />
             <TourOffer />
             <ViewTours />
 

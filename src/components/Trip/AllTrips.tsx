@@ -5,32 +5,42 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const AllTrips = ({ tours }: {tours: TTour[]}) => {
+const AllTrips = ({ tours }: {tours: any}) => {
   const [toursData, setToursData] = useState<any | TTour[]>([]);
+  const [meta, setMeta] = useState(tours?.meta);
+
+
+  const fetchTours = async (params = {}) => {
+    const query = new URLSearchParams({ ...params, limit: meta.limit }).toString();
+    const res = await fetch(`${baseApi}/api/v1/trips?${query}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
+  
+    const queryValue = await res.json();
+  
+    setToursData(queryValue);
+    setMeta(queryValue?.meta);
+  };
+  
+
 
   const handleOnSearching = async (e: any) => {
     const searchTerm = e.target.value;
-  
-
-    const res = await fetch(
-      `${baseApi}/api/v1/trips?searchTerm=${searchTerm}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      }
-    );
-
-    const queryValue = await res.json();
-
-    setToursData(queryValue);
+    fetchTours({ searchTerm, page: 1 });
   };
 
 
+  const handlePageChange = (newPage: number) => {
+    fetchTours({ page: newPage });
+  };
+
   useEffect(() => {
-    setToursData(tours)
+    setToursData(tours);
+    setMeta(tours?.meta);
   }, [tours]);
 
 
@@ -46,7 +56,7 @@ const AllTrips = ({ tours }: {tours: TTour[]}) => {
                 className="input input-bordered join-item"
                 placeholder="Search"
               />
-              <select className="select select-bordered join-item">
+              <select     onChange={handleOnSearching} className="select select-bordered join-item">
                 <option disabled selected>
                   Filter
                 </option>
@@ -55,7 +65,7 @@ const AllTrips = ({ tours }: {tours: TTour[]}) => {
                 </option>
                 <option>Nature</option>
                 <option>Adventure</option>
-                <option>Cultural</option>
+                <option>Culture</option>
                 <option className="font-bold" disabled>
                   Continent
                 </option>
@@ -121,6 +131,22 @@ const AllTrips = ({ tours }: {tours: TTour[]}) => {
           </div>
         ))}
       </div>
+
+
+  <div className="flex">
+  {Array.from({ length: Math.ceil(meta.total / meta.limit) }).map((_, index) => (
+  <input
+    key={index}
+    type="radio"
+    name="options"
+    className={`join-item btn btn-square mt-10 ${meta.page === index + 1 ? 'btn-primary' : ''}`}
+    aria-label={`${index + 1}`}
+    checked={meta.page === index + 1}
+    onChange={() => handlePageChange(index + 1)}
+  />
+))}
+  </div>
+
     </div>
   );
 };

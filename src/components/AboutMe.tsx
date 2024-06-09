@@ -8,9 +8,13 @@ const AboutMe = () => {
   const css: any = { "--value": 75 };
   const js: any = { "--value": 70 };
   const react: any = { "--value": 80 };
+  const next: any = { "--value": 70 };
   const node: any = { "--value": 65 };
-  const mongodb: any = { "--value": 55 };
-  const express: any = { "--value": 65 };
+  const mongodb: any = { "--value": 65 };
+  const postgress: any = { "--value": 60 };
+  const express: any = { "--value": 75 };
+  const prisma: any = { "--value": 65 };
+  const logic: any = { "--value": 85 };
   const others: any = { "--value": 90 };
 
 
@@ -20,8 +24,8 @@ const AboutMe = () => {
         <div className="hero-overlay bg-opacity-90"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-4xl border-2 border-slate-600 py-2 px-4 bg-opacity-20 bg-black">
-            <h1 className="mb-5 text-4xl font-bold text-white mb-0">I&apos;M ABUDLLAH BOSHIR</h1>
-            <p className="mb-5 text-[#03bcbe] pb-0 mb-0">Beautiful creative experience in website development.</p>
+            <h1 className=" text-4xl font-bold text-white mb-0">I&apos;M ABUDLLAH BOSHIR</h1>
+            <p className=" text-[#03bcbe] pb-0 mb-0">Beautiful creative experience in website development.</p>
           </div>
         </div>
       </div>
@@ -71,15 +75,15 @@ const AboutMe = () => {
       </div>
 
 
-      <div className='bg-gray-200 h-[600px] h-sreen flex items-center justify-center text-black flex-col'>
+      <div className='bg-gray-200 h-[600px] flex items-center justify-center text-black flex-col'>
 
         <div className='mb-16 flex flex-col justify-center w-sreen'>
           <h1 className='text-4xl font-semibold text-violet-600'>TECHNICAL SKILLS</h1>
           <p className='text-center'>CREATIVE WEB DEVELOPER</p>
         </div>
 
-        <div className='grid grid-cols-4 gap-4 w-[800px]'>
-
+        <div className='grid grid-cols-6 gap-4 w-[850px]'>
+          
           <div className='mb-6'>
             <div className="radial-progress text-violet-600" style={html}>85%</div>
             <h1 className='text-xl font-semibold mt-2'>HTML5</h1>
@@ -97,29 +101,51 @@ const AboutMe = () => {
 
           <div>
             <div className="radial-progress text-violet-600" style={react}>80%</div>
-            <h1 className='text-xl font-semibold mt-2'>REACT</h1>
+            <h1 className='text-xl font-semibold mt-2'>REACT JS</h1>
+          </div>
+
+          <div>
+            <div className="radial-progress text-violet-600" style={next}>70%</div>
+            <h1 className='text-xl font-semibold mt-2'>NEXT JS</h1>
           </div>
 
           <div>
             <div className="radial-progress text-violet-600" style={node}>65%</div>
-            <h1 className='text-xl font-semibold mt-2'>NODE</h1>
+            <h1 className='text-xl font-semibold mt-2 ml-3'>NODE</h1>
           </div>
+          
           <div>
-
-            <div className="radial-progress text-violet-600" style={mongodb}>55%</div>
+            <div className="radial-progress text-violet-600" style={mongodb}>65%</div>
             <h1 className='text-xl font-semibold mt-2'>MONGO DB</h1>
           </div>
 
           <div>
-            <div className="radial-progress text-violet-600" style={express}>65%</div>
+            <div className="radial-progress text-violet-600" style={postgress}>60%</div>
+            <h1 className='text-xl font-semibold mt-2'>POSTGRES</h1>
+          </div>
+
+
+          <div>
+            <div className="radial-progress text-violet-600" style={express}>75%</div>
             <h1 className='text-xl font-semibold mt-2'>EXPRESS</h1>
           </div>
-          <div>
 
+          
+          <div>
+            <div className="radial-progress text-violet-600" style={prisma}>65%</div>
+            <h1 className='text-xl font-semibold mt-2 ml-2'>PRISMA</h1>
+          </div>
+
+          <div className='mb-6'>
+            <div className="radial-progress text-violet-600" style={logic}>85%</div>
+            <h1 className='text-xl font-semibold mt-2 ml-3'>LOGIC</h1>
+          </div>
+
+
+          <div>
             <div className="radial-progress text-violet-600" style={others}>90%</div>
             <h1 className='text-xl font-semibold mt-2'>OTHERS</h1>
           </div>
-
 
         </div>
 
