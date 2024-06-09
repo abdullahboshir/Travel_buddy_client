@@ -3,12 +3,10 @@ import React from 'react';
 import { BiRun } from 'react-icons/bi';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FaSadTear } from 'react-icons/fa';
 
 
 
-
-const UnAthorizedPage = () => {
+const NotFound = () => {
   const router = useRouter();
 
   return (
@@ -17,12 +15,10 @@ const UnAthorizedPage = () => {
     <div className="flex flex-col h-screen fixed ml-96">
         <div className='w-full h-screen flex mt-[150px] ml-[21px] items-center flex-col relatve'>
 
-      <h1 className="text-3xl font-semibold mb-2">Uhh-ohh! FORBIDDEN AREA!</h1>
+      <h1 className="text-3xl font-semibold mb-2">AHHHHHHH! YOU FOUND ME!</h1>
       <p className="w-96 text-center">
-      Looks like you&apos;ve stumbled upon a restricted zone. Please turn back before the alarms go off!
+        Uh oh, we can&apos;t seem to find the page you&apos;re looking for. Try going back to the previous page!
       </p>
-      <p className='text-red-400 text-3xl'>403- Access Denied!<FaSadTear className='inline-block ml-2'/></p>
-      <p className='text-red-400 text-white text-6xl'></p>
       <BiRun className="text-[100px] text-[#FC9933] transform -scale-x-100" />
       <br />
       <button
@@ -53,4 +49,4 @@ const UnAthorizedPage = () => {
   );
 };
 
-export default UnAthorizedPage;
+export default NotFound;

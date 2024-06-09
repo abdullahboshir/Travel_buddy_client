@@ -6,11 +6,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const TourCard = ({ tours }: {tours: TTour[]}) => {
-  const [toursData, setToursData] = useState<any | TTour[]>([]);
+  const [toursData, setToursData] = useState<any | TTour[]>(tours || []);
+  const [sortBy, setSortBy] = useState('');
+
 
   const handleOnSearching = async (e: any) => {
     const searchTerm = e.target.value;
-  
+
 
     const res = await fetch(
       `${baseApi}/api/v1/trips?searchTerm=${searchTerm}`,
@@ -34,9 +36,43 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
   }, [tours]);
 
 
+
+
+  const handleOnFilter = async (e: any) => {
+    const sortBy = e.target.value;
+    console.log('eeeeeeeeeeeeeeeeeeeeeee', sortBy)
+
+    const res = await fetch(
+      `${baseApi}/api/v1/trips?sortBy=${sortBy}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      }
+    );
+
+    const queryValue = await res.json();
+
+    setToursData(queryValue);
+  };
+
+
+  useEffect(() => {
+    setToursData(tours)
+  }, [tours]);
+
+
+  const tourLength = toursData?.data?.length > 9 ? toursData?.data?.slice(0, 9) : toursData?.data;
+
+
+
   return (
     <div className="flex w-full flex-col items-center bg-base-100 shadow-xl bg-gray-200 p-8 pt-0">
-      <button className="px-5 py-2 -mt-5 z-50 text-lg rounded-lg bg-[#00c2ab] border-none text-white font-semibold hover:text-black hover:text-white hover:border-0 hover:text-[18px] font-semibold hover:font-bold ease-in duration-100">Share Your Trip</button>
+
+      <Link href='/trip/create-trip' className="px-5 py-2 -mt-5 z-50 text-lg rounded-lg bg-[#00c2ab] border-none text-white font-semibold hover:text-black hover:text-white hover:border-0 hover:text-[18px] font-semibold hover:font-bold ease-in duration-100">Share Your Trip</Link>
+
       <div className="w-full flex justify-center items-center flex-col text-black mb-8">
         <h1 className="text-5xl font-semibold text-[#00c2ab] my-10">FIND TOUR DESIRE TOUR</h1>
         <div className="w-96">
@@ -47,7 +83,7 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
                 className="input input-bordered join-item"
                 placeholder="Search"
               />
-              <select className="select select-bordered join-item">
+              <select onChange={handleOnFilter} className="select select-bordered join-item">
                 <option disabled selected>
                   Filter
                 </option>
@@ -73,7 +109,7 @@ const TourCard = ({ tours }: {tours: TTour[]}) => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-8 text-black">
-        {toursData?.data?.map((tour: TTour, index: number) => (
+        { tourLength?.map((tour: TTour, index: number) => (
           <div
             key={index}
             className="w-[370px] h-[470px] bg-white rounded-lg"

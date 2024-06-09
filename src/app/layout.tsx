@@ -32,7 +32,7 @@ export default async function RootLayout({
             </div>
             
             <div>
-                <Footer />
+                {/* <Footer /> */}
               </div>
           </div>
 

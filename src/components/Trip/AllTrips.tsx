@@ -121,10 +121,6 @@ const AllTrips = ({ tours }: {tours: TTour[]}) => {
           </div>
         ))}
       </div>
-
-      <Link href='/trip/allTrips' className="px-3 py-2 rounded-lg text-white bg-[#00c2ab] text-md hover:bg-[#083344] hover:font-bold hover:text-[16px] ease-in duration-100 transition my-10">
-        See more..
-      </Link>
     </div>
   );
 };
