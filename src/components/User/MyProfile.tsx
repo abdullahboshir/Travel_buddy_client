@@ -20,13 +20,17 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
+  const [bio, setBio] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [updatedUser, setUpdatedUser] = useState(null);
+  const [updatedUser, setUpdatedUser] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const imgStorageKey = "52e2a715dfd6d706e4d4ce8b0cd8526f";
 
   const userProfile = userProfileRes?.data?.userProfile[0];
+
+  console.log('updated user', updatedUser)
+
   const handleProfileUpdate = async (e: any) => {
     e.preventDefault();
     setLoading(true)
@@ -35,6 +39,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
         username,
         email,
         age: Number(age),
+        bio,
         contactNumber,
         address,
       };
@@ -241,26 +246,26 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
 
             <div className="flex flex-col justify-center items-center p-6">
               <h1 className="text-3xl font-bold mt-2 text-gray-800">
-                {userProfileRes?.data?.username}
+                {updatedUser? updatedUser?.data?.username : userProfileRes?.data?.username}
               </h1>
               <div className="w-full max-w-md mt-4 space-y-2">
                 <div className="grid grid-cols-4 gap-2">
                   <span className="font-semibold text-gray-600">Email:</span>
                   <span className="col-span-2 text-gray-700">
-                    {userProfileRes?.data?.email}
+                    {updatedUser? updatedUser?.data?.email : userProfileRes?.data?.email}
                   </span>
                 </div>
                 <div className="grid grid-cols-4 gap-2">
                   <span className="font-semibold text-gray-600">Status:</span>
                   <span className="col-span-2 text-gray-700">
-                    {userProfileRes?.data?.status}
+                    {updatedUser? updatedUser?.data?.status : userProfileRes?.data?.status}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-4 gap-2">
                   <span className="font-semibold text-gray-600">Age:</span>
                   <span className="col-span-2 text-gray-700">
-                    {userProfile?.age || "Empty"}
+                    {updatedUser? updatedUser?.data?.age : userProfile?.age || "Empty"}
                   </span>
                 </div>
               </div>
@@ -325,7 +330,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                       {[
                         {
                           label: "Name:",
-                          value: userProfileRes?.data?.username,
+                          value: updatedUser? updatedUser?.data?.username : userProfileRes?.data?.username,
                           input: (
                             <div className="w-72 text-black">
                               <input
@@ -340,7 +345,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Email:",
-                          value: userProfileRes?.data?.email,
+                          value: updatedUser? updatedUser?.data?.email : userProfileRes?.data?.email,
                           input: (
                             <div className="w-72 text-black">
                               <input
@@ -355,7 +360,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Status:",
-                          value: userProfileRes?.data?.status,
+                          value: updatedUser? updatedUser?.data?.status : userProfileRes?.data?.status,
                           input: (
                             <div className="w-72 text-black">
                               <input
@@ -371,7 +376,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Password Change:",
-                          value: userProfileRes?.data?.needPasswordChange,
+                          value: updatedUser? updatedUser?.data?.needPasswordChange === true? 'true' : 'false' : userProfileRes?.data?.needPasswordChange === true? 'true' : 'false',
                           input: (
                             <div className="w-72 text-black">
                               <input
@@ -387,7 +392,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Need Update Profile:",
-                          value: userProfileRes?.data?.needUpdateProfile,
+                          value: updatedUser? updatedUser?.data?.needUpdateProfile === true? 'true' : 'false' : userProfileRes?.data?.needUpdateProfile === true? 'true' : 'false',
                           input: (
                             <div className="w-72 text-black">
                              
@@ -404,7 +409,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Contact Number:",
-                          value: userProfile?.contactNumber || "Empty",
+                          value: updatedUser? updatedUser?.data?.contactNumber : userProfile?.contactNumber || "Empty",
                           input: (
                             <div className="w-72 text-black z-50">
                               <input
@@ -419,7 +424,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Address:",
-                          value: userProfile?.address || "Empty",
+                          value: updatedUser? updatedUser?.data?.address : userProfile?.address || "Empty",
                           input: (
                             <div className="w-72 text-black z-50">
                               <input
@@ -434,7 +439,7 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Age:",
-                          value: userProfile?.age || "Empty",
+                          value: updatedUser? updatedUser?.data?.age : userProfile?.age || "Empty",
                           input: (
                             <div className="w-72 text-black z-50">
                               <input
@@ -449,11 +454,11 @@ const MyProfile = ({ userProfileRes, accessToken, userTrips }: any) => {
                         },
                         {
                           label: "Bio:",
-                          value: userProfile?.bio || "Empty",
+                          value: updatedUser? updatedUser?.data?.bio : userProfile?.bio || "Empty",
                           input: (
                             <div className="w-72 text-black z-50">
                               <input
-                                onBlur={(e) => setAge(e.target.value)}
+                                onBlur={(e) => setBio(e.target.value)}
                                 name="bio"
                                 type="text"
                                 placeholder="Bio"

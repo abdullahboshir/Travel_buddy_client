@@ -8,7 +8,7 @@ const ToursPage = async () => {
   });
   const tours = await res.json();
 
-  return <ToursManagement tours={tours?.data}/>;
+  return <ToursManagement/>;
 };
 
 export default ToursPage;
